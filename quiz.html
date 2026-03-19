@@ -320,7 +320,7 @@
       </div>
 
       <div style="text-align:center;">
-        <button class="btn-primary" onclick="startQuiz()" style="font-size:17px;padding:18px 48px;">Start the Simulator →</button>
+        <button type="button" class="btn-primary" onclick="startQuiz()" style="font-size:17px;padding:18px 48px;">Start the Simulator →</button>
         <p style="margin-top:14px;font-size:13px;color:var(--gray);">Takes about 5 minutes. Immediate feedback on every question.</p>
       </div>
     </div>
@@ -347,7 +347,7 @@
 
       <div id="q-feedback" style="display:none;"></div>
 
-      <button id="btn-next" class="btn-primary" onclick="nextQuestion()" style="display:none;width:100%;justify-content:center;">
+      <button type="button" id="btn-next" class="btn-primary" onclick="nextQuestion()" style="display:none;width:100%;justify-content:center;">
         Next Question →
       </button>
 
@@ -410,7 +410,7 @@
       <div id="res-rec-card" class="rec-card"></div>
 
       <div class="results-actions">
-        <button onclick="retakeQuiz()">↺ Retake the quiz</button>
+        <button type="button" onclick="retakeQuiz()">↺ Retake the quiz</button>
         <a href="index.html">← Back to Pack Ready</a>
       </div>
     </div>
@@ -680,7 +680,7 @@
     const optList = document.getElementById('q-options');
     const letters = ['A', 'B', 'C', 'D'];
     optList.innerHTML = q.opts.map((opt, i) =>
-      `<button class="option-btn" id="opt-${i}" onclick="selectAnswer(${i})">
+      `<button type="button" class="option-btn" id="opt-${i}" onclick="selectAnswer(${i})">
         <span class="option-letter">${letters[i]}</span>
         <span>${opt}</span>
       </button>`
@@ -737,12 +737,17 @@
 
   // ─── NEXT QUESTION ────────────────────────────────────────────────────────
   function nextQuestion() {
+    // Blur active element so keyboard events don't bleed into the next question
+    if (document.activeElement) document.activeElement.blur();
     currentQ++;
     if (currentQ >= questions.length) {
       showResults();
     } else {
-      renderQuestion();
-      window.scrollTo({ top: 0, behavior: 'smooth' });
+      // Defer render to let the event queue fully clear before new buttons appear
+      setTimeout(function() {
+        renderQuestion();
+        window.scrollTo({ top: 0, behavior: 'smooth' });
+      }, 0);
     }
   }
 
