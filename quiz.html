@@ -1,0 +1,865 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Derby Knowledge Quiz — Bout Simulator | Pack Ready</title>
+  <meta name="description" content="15 scenario-based questions across 3 skill areas. Find out where your derby knowledge is strong — and where you need to study up." />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Inter:wght@400;500;600;700;800;900&display=swap" rel="stylesheet" />
+
+  <style>
+    :root {
+      --black:       #111111;
+      --black-soft:  #1a1a1a;
+      --black-card:  #1f1f1f;
+      --black-border:#2a2a2a;
+      --pink:        #EC4899;
+      --pink-dark:   #be185d;
+      --pink-glow:   rgba(236,72,153,0.18);
+      --gold:        #EAB308;
+      --gold-light:  #fef3c7;
+      --white:       #F9FAFB;
+      --white-soft:  #d1d5db;
+      --gray:        #6b7280;
+      --green:       #22c55e;
+      --red:         #ef4444;
+      --font-display: 'Bebas Neue', sans-serif;
+      --font-body:    'Inter', sans-serif;
+      --radius-sm: 8px;
+      --radius-md: 14px;
+      --radius-lg: 24px;
+      --max-w: 740px;
+    }
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    html { scroll-behavior: smooth; }
+    body {
+      background: var(--black);
+      color: var(--white);
+      font-family: var(--font-body);
+      font-size: 16px;
+      line-height: 1.6;
+      min-height: 100vh;
+      overflow-x: hidden;
+    }
+    body::before {
+      content: '';
+      position: fixed; inset: 0;
+      background-image:
+        linear-gradient(rgba(236,72,153,0.03) 1px, transparent 1px),
+        linear-gradient(90deg, rgba(236,72,153,0.03) 1px, transparent 1px);
+      background-size: 52px 52px;
+      pointer-events: none; z-index: 0;
+    }
+
+    /* NAV */
+    .nav {
+      position: sticky; top: 0; z-index: 100;
+      background: rgba(17,17,17,0.95);
+      backdrop-filter: blur(10px);
+      border-bottom: 1px solid var(--black-border);
+      padding: 14px 24px;
+      display: flex; align-items: center; justify-content: space-between;
+    }
+    .nav-brand { font-family: var(--font-display); font-size: 22px; color: var(--white); text-decoration: none; letter-spacing: 1px; }
+    .nav-brand span { color: var(--pink); }
+    .nav-back { font-size: 13px; color: var(--gray); text-decoration: none; display: flex; align-items: center; gap: 6px; transition: color 0.2s; }
+    .nav-back:hover { color: var(--white); }
+
+    /* MAIN WRAPPER */
+    .quiz-wrapper {
+      position: relative; z-index: 1;
+      max-width: var(--max-w);
+      margin: 0 auto;
+      padding: 40px 20px 80px;
+    }
+
+    /* SCREEN TRANSITIONS */
+    .screen { display: none; animation: fadeIn 0.3s ease; }
+    .screen.active { display: block; }
+    @keyframes fadeIn { from { opacity: 0; transform: translateY(12px); } to { opacity: 1; transform: translateY(0); } }
+
+    /* WELCOME SCREEN */
+    .welcome-hero {
+      text-align: center;
+      padding: 48px 0 40px;
+    }
+    .welcome-eyebrow {
+      display: inline-flex; align-items: center; gap: 8px;
+      background: rgba(236,72,153,0.1); border: 1px solid rgba(236,72,153,0.25);
+      border-radius: 999px; padding: 6px 16px;
+      font-size: 11px; font-weight: 700; letter-spacing: 2px; text-transform: uppercase;
+      color: var(--pink); margin-bottom: 24px;
+    }
+    .welcome-title {
+      font-family: var(--font-display); font-size: clamp(42px, 8vw, 72px);
+      line-height: 0.95; margin-bottom: 20px; color: var(--white);
+    }
+    .welcome-title span { color: var(--pink); }
+    .welcome-sub {
+      font-size: 17px; color: var(--white-soft); max-width: 520px; margin: 0 auto 36px; line-height: 1.65;
+    }
+    .welcome-categories {
+      display: grid; grid-template-columns: repeat(3, 1fr); gap: 12px; margin-bottom: 40px;
+    }
+    .cat-card {
+      background: var(--black-card); border: 1px solid var(--black-border); border-radius: var(--radius-md);
+      padding: 16px; text-align: left;
+    }
+    .cat-card-dot { width: 8px; height: 8px; border-radius: 50%; margin-bottom: 10px; }
+    .cat-card-name { font-weight: 700; font-size: 13px; margin-bottom: 4px; }
+    .cat-card-desc { font-size: 12px; color: var(--gray); }
+    .dot-pink { background: var(--pink); }
+    .dot-gold { background: var(--gold); }
+    .dot-green { background: var(--green); }
+    .text-pink { color: var(--pink); }
+    .text-gold { color: var(--gold); }
+    .text-green { color: var(--green); }
+
+    /* BUTTONS */
+    .btn-primary {
+      display: inline-flex; align-items: center; justify-content: center; gap: 8px;
+      background: var(--pink); color: white; font-weight: 700; font-size: 15px;
+      border: none; border-radius: var(--radius-sm); padding: 16px 36px;
+      cursor: pointer; transition: all 0.2s; text-decoration: none;
+      font-family: var(--font-body);
+    }
+    .btn-primary:hover { background: var(--pink-dark); transform: translateY(-1px); }
+    .btn-outline {
+      display: inline-flex; align-items: center; justify-content: center; gap: 8px;
+      background: transparent; color: var(--white); font-weight: 600; font-size: 14px;
+      border: 1px solid rgba(255,255,255,0.2); border-radius: var(--radius-sm); padding: 12px 24px;
+      cursor: pointer; transition: all 0.2s; text-decoration: none;
+      font-family: var(--font-body);
+    }
+    .btn-outline:hover { border-color: var(--white); }
+    .btn-gold {
+      display: inline-flex; align-items: center; justify-content: center; gap: 8px;
+      background: var(--gold); color: var(--black); font-weight: 700; font-size: 15px;
+      border: none; border-radius: var(--radius-sm); padding: 16px 36px;
+      cursor: pointer; transition: all 0.2s; text-decoration: none;
+      font-family: var(--font-body);
+    }
+    .btn-gold:hover { filter: brightness(1.05); transform: translateY(-1px); }
+
+    /* PROGRESS */
+    .progress-bar-wrap { margin-bottom: 32px; }
+    .progress-meta { display: flex; align-items: center; justify-content: space-between; margin-bottom: 8px; font-size: 13px; }
+    .progress-meta-left { font-weight: 600; }
+    .progress-bg { height: 6px; background: var(--black-card); border-radius: 999px; overflow: hidden; }
+    .progress-fill-bar { height: 100%; background: var(--pink); border-radius: 999px; transition: width 0.4s ease; }
+
+    /* CATEGORY TAG */
+    .q-category-tag {
+      display: inline-flex; align-items: center; gap: 8px;
+      border-radius: 999px; padding: 5px 14px;
+      font-size: 11px; font-weight: 700; letter-spacing: 1.5px; text-transform: uppercase;
+      margin-bottom: 20px;
+    }
+    .cat-basics  { background: rgba(236,72,153,0.12); border: 1px solid rgba(236,72,153,0.25); color: var(--pink); }
+    .cat-pack    { background: rgba(234,179,8,0.12);  border: 1px solid rgba(234,179,8,0.25);  color: var(--gold); }
+    .cat-strategy{ background: rgba(34,197,94,0.12);  border: 1px solid rgba(34,197,94,0.25);  color: var(--green); }
+
+    /* QUESTION */
+    .q-number { font-size: 11px; color: var(--gray); text-transform: uppercase; letter-spacing: 1px; margin-bottom: 8px; }
+    .q-text {
+      font-size: 20px; font-weight: 700; color: var(--white);
+      line-height: 1.45; margin-bottom: 28px;
+    }
+    .q-scenario {
+      background: var(--black-card); border: 1px solid var(--black-border); border-left: 3px solid var(--pink);
+      border-radius: var(--radius-sm); padding: 14px 18px;
+      font-size: 14px; color: var(--white-soft); line-height: 1.6; font-style: italic;
+      margin-bottom: 24px;
+    }
+
+    /* OPTIONS */
+    .options-list { display: flex; flex-direction: column; gap: 10px; margin-bottom: 20px; }
+    .option-btn {
+      width: 100%; text-align: left;
+      background: rgba(255,255,255,0.03); border: 1px solid rgba(255,255,255,0.1);
+      border-radius: var(--radius-sm); padding: 16px 18px;
+      color: var(--white); font-family: var(--font-body); font-size: 15px; line-height: 1.4;
+      cursor: pointer; transition: all 0.2s; display: flex; align-items: flex-start; gap: 14px;
+    }
+    .option-btn:hover:not(:disabled) { border-color: rgba(236,72,153,0.4); background: rgba(236,72,153,0.06); }
+    .option-btn:disabled { cursor: default; }
+    .option-letter {
+      min-width: 28px; height: 28px; border-radius: 50%;
+      background: rgba(255,255,255,0.07); display: flex; align-items: center; justify-content: center;
+      font-size: 12px; font-weight: 700; color: var(--gray); flex-shrink: 0; margin-top: 1px;
+      transition: all 0.2s;
+    }
+    .option-btn.correct { border-color: var(--green); background: rgba(34,197,94,0.08); }
+    .option-btn.correct .option-letter { background: var(--green); color: white; }
+    .option-btn.wrong { border-color: var(--red); background: rgba(239,68,68,0.06); }
+    .option-btn.wrong .option-letter { background: var(--red); color: white; }
+    .option-btn.reveal-correct { border-color: var(--gold); background: rgba(234,179,8,0.08); }
+    .option-btn.reveal-correct .option-letter { background: var(--gold); color: var(--black); }
+
+    /* FEEDBACK */
+    .feedback-box {
+      border-radius: var(--radius-md); padding: 18px 20px; margin-bottom: 20px;
+      animation: fadeIn 0.25s ease;
+    }
+    .feedback-box.fb-correct { background: rgba(34,197,94,0.08); border: 1px solid rgba(34,197,94,0.25); }
+    .feedback-box.fb-wrong   { background: rgba(239,68,68,0.06);  border: 1px solid rgba(239,68,68,0.2); }
+    .feedback-label { font-size: 11px; font-weight: 700; letter-spacing: 1.5px; text-transform: uppercase; margin-bottom: 6px; }
+    .feedback-label.fl-correct { color: var(--green); }
+    .feedback-label.fl-wrong   { color: var(--red); }
+    .feedback-text { font-size: 14px; color: var(--white-soft); line-height: 1.6; }
+    .feedback-tip {
+      margin-top: 10px; padding-top: 10px; border-top: 1px solid rgba(255,255,255,0.08);
+      font-size: 13px; color: var(--gray);
+    }
+    .feedback-tip strong { color: var(--gold); }
+
+    /* NEXT BTN */
+    #btn-next { margin-top: 4px; }
+
+    /* RESULTS */
+    .results-score-row {
+      display: flex; align-items: center; gap: 32px; flex-wrap: wrap;
+      background: var(--black-card); border: 1px solid var(--black-border); border-radius: var(--radius-lg);
+      padding: 32px; margin-bottom: 28px;
+    }
+    .score-circle {
+      width: 100px; height: 100px; border-radius: 50%; flex-shrink: 0;
+      display: flex; flex-direction: column; align-items: center; justify-content: center;
+      border: 4px solid var(--pink);
+    }
+    .score-circle-num { font-family: var(--font-display); font-size: 36px; line-height: 1; color: var(--white); }
+    .score-circle-label { font-size: 10px; color: var(--gray); text-transform: uppercase; letter-spacing: 1px; margin-top: 2px; }
+    .score-summary h2 { font-size: 22px; font-weight: 800; margin-bottom: 6px; }
+    .score-summary p { font-size: 14px; color: var(--white-soft); line-height: 1.5; max-width: 380px; }
+
+    .results-categories { margin-bottom: 28px; }
+    .results-categories h3 { font-size: 13px; font-weight: 700; text-transform: uppercase; letter-spacing: 1.5px; color: var(--gray); margin-bottom: 16px; }
+    .cat-result-row { margin-bottom: 16px; }
+    .cat-result-meta { display: flex; justify-content: space-between; align-items: center; margin-bottom: 6px; font-size: 14px; }
+    .cat-result-name { font-weight: 600; }
+    .cat-result-score { font-weight: 700; }
+    .cat-bar-bg { height: 8px; background: var(--black-card); border-radius: 999px; overflow: hidden; }
+    .cat-bar-fill { height: 100%; border-radius: 999px; transition: width 1s ease; }
+
+    .results-sections { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; margin-bottom: 28px; }
+    .result-section { background: var(--black-card); border: 1px solid var(--black-border); border-radius: var(--radius-md); padding: 20px; }
+    .result-section h4 { font-size: 12px; font-weight: 700; letter-spacing: 1.5px; text-transform: uppercase; margin-bottom: 12px; }
+    .result-section-item { font-size: 14px; color: var(--white-soft); margin-bottom: 6px; display: flex; align-items: flex-start; gap: 8px; line-height: 1.4; }
+    .result-section-item .dot { width: 6px; height: 6px; border-radius: 50%; flex-shrink: 0; margin-top: 6px; }
+
+    .rec-card {
+      border-radius: var(--radius-md); padding: 28px;
+      margin-bottom: 28px;
+    }
+    .rec-card.rc-guide { background: rgba(236,72,153,0.08); border: 1px solid rgba(236,72,153,0.25); }
+    .rec-card.rc-bundle { background: rgba(234,179,8,0.08); border: 1px solid rgba(234,179,8,0.25); }
+    .rec-card.rc-app { background: rgba(34,197,94,0.08); border: 1px solid rgba(34,197,94,0.25); }
+    .rec-eyebrow { font-size: 11px; font-weight: 700; text-transform: uppercase; letter-spacing: 1.5px; margin-bottom: 8px; }
+    .rec-title { font-family: var(--font-display); font-size: 28px; margin-bottom: 8px; color: var(--white); }
+    .rec-desc { font-size: 15px; color: var(--white-soft); line-height: 1.6; margin-bottom: 20px; }
+    .rec-btns { display: flex; gap: 12px; flex-wrap: wrap; }
+
+    .results-actions { text-align: center; padding-top: 16px; }
+    .results-actions a, .results-actions button {
+      display: inline-block; font-size: 13px; color: var(--gray); background: none; border: none; cursor: pointer;
+      text-decoration: none; transition: color 0.2s; font-family: var(--font-body); margin: 8px 12px;
+    }
+    .results-actions a:hover, .results-actions button:hover { color: var(--white); }
+
+    /* QUESTION COUNTER */
+    .q-counter-dots { display: flex; gap: 6px; margin-bottom: 28px; flex-wrap: wrap; }
+    .q-dot { width: 22px; height: 5px; border-radius: 999px; background: var(--black-card); transition: background 0.3s; }
+    .q-dot.done-correct { background: var(--green); }
+    .q-dot.done-wrong { background: var(--red); }
+    .q-dot.current { background: var(--pink); }
+
+    @media (max-width: 600px) {
+      .welcome-categories { grid-template-columns: 1fr; }
+      .results-sections { grid-template-columns: 1fr; }
+      .results-score-row { flex-direction: column; gap: 20px; }
+      .q-text { font-size: 17px; }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- NAV -->
+  <nav class="nav">
+    <a href="index.html" class="nav-brand">PACK <span>READY</span></a>
+    <a href="index.html" class="nav-back">← Back to site</a>
+  </nav>
+
+  <div class="quiz-wrapper">
+
+    <!-- ======= WELCOME SCREEN ======= -->
+    <div id="screen-welcome" class="screen active">
+      <div class="welcome-hero">
+        <div class="welcome-eyebrow">★ Bout Simulator</div>
+        <h1 class="welcome-title">Test Your<br><span>Derby IQ.</span></h1>
+        <p class="welcome-sub">15 real-game scenarios across three skill areas. Find out where you're solid — and where you need to spend some time with the rulebook before your first bout.</p>
+      </div>
+
+      <div class="welcome-categories">
+        <div class="cat-card">
+          <div class="cat-card-dot dot-pink"></div>
+          <div class="cat-card-name text-pink">Fresh Meat Basics</div>
+          <div class="cat-card-desc">Gear, positions, jam structure, basic penalties, boundaries</div>
+        </div>
+        <div class="cat-card">
+          <div class="cat-card-dot dot-gold"></div>
+          <div class="cat-card-name text-gold">Pack Awareness</div>
+          <div class="cat-card-desc">Pack definition, engagement zone, out of play, legal contact</div>
+        </div>
+        <div class="cat-card">
+          <div class="cat-card-dot dot-green"></div>
+          <div class="cat-card-name text-green">Jammer Strategy</div>
+          <div class="cat-card-desc">Scoring, lead jammer, power jams, star pass, calling off</div>
+        </div>
+      </div>
+
+      <div style="text-align:center;">
+        <button class="btn-primary" onclick="startQuiz()" style="font-size:17px;padding:18px 48px;">Start the Simulator →</button>
+        <p style="margin-top:14px;font-size:13px;color:var(--gray);">Takes about 5 minutes. Immediate feedback on every question.</p>
+      </div>
+    </div>
+
+    <!-- ======= QUESTION SCREEN ======= -->
+    <div id="screen-question" class="screen">
+
+      <div class="progress-bar-wrap">
+        <div class="progress-meta">
+          <span class="progress-meta-left" id="q-progress-label">Question 1 of 15</span>
+          <span id="q-score-running" style="font-size:13px;color:var(--gray);"></span>
+        </div>
+        <div class="progress-bg"><div class="progress-fill-bar" id="q-progress-bar" style="width:0%"></div></div>
+      </div>
+
+      <div class="q-counter-dots" id="q-dots"></div>
+
+      <div id="q-category-tag" class="q-category-tag cat-basics"></div>
+
+      <div id="q-text" class="q-text"></div>
+      <div id="q-scenario" class="q-scenario" style="display:none;"></div>
+
+      <div class="options-list" id="q-options"></div>
+
+      <div id="q-feedback" style="display:none;"></div>
+
+      <button id="btn-next" class="btn-primary" onclick="nextQuestion()" style="display:none;width:100%;justify-content:center;">
+        Next Question →
+      </button>
+
+    </div>
+
+    <!-- ======= RESULTS SCREEN ======= -->
+    <div id="screen-results" class="screen">
+      <div style="margin-bottom:32px;">
+        <div style="font-size:11px;color:var(--pink);font-weight:700;letter-spacing:2px;text-transform:uppercase;margin-bottom:8px;">Results</div>
+        <h2 style="font-family:var(--font-display);font-size:clamp(36px,7vw,60px);line-height:1;color:var(--white);">YOUR <span style="color:var(--pink);">DERBY IQ.</span></h2>
+      </div>
+
+      <div class="results-score-row">
+        <div class="score-circle" id="res-score-circle">
+          <div class="score-circle-num" id="res-score-num">—</div>
+          <div class="score-circle-label">/ 15</div>
+        </div>
+        <div class="score-summary">
+          <h2 id="res-headline"></h2>
+          <p id="res-sub"></p>
+        </div>
+      </div>
+
+      <div class="results-categories">
+        <h3>Score by Category</h3>
+        <div class="cat-result-row">
+          <div class="cat-result-meta">
+            <span class="cat-result-name text-pink">Fresh Meat Basics</span>
+            <span class="cat-result-score text-pink" id="res-basics-score"></span>
+          </div>
+          <div class="cat-bar-bg"><div class="cat-bar-fill" id="res-basics-bar" style="background:var(--pink);width:0%"></div></div>
+        </div>
+        <div class="cat-result-row">
+          <div class="cat-result-meta">
+            <span class="cat-result-name text-gold">Pack Awareness</span>
+            <span class="cat-result-score text-gold" id="res-pack-score"></span>
+          </div>
+          <div class="cat-bar-bg"><div class="cat-bar-fill" id="res-pack-bar" style="background:var(--gold);width:0%"></div></div>
+        </div>
+        <div class="cat-result-row">
+          <div class="cat-result-meta">
+            <span class="cat-result-name text-green">Jammer Strategy</span>
+            <span class="cat-result-score text-green" id="res-strategy-score"></span>
+          </div>
+          <div class="cat-bar-bg"><div class="cat-bar-fill" id="res-strategy-bar" style="background:var(--green);width:0%"></div></div>
+        </div>
+      </div>
+
+      <div class="results-sections">
+        <div class="result-section">
+          <h4 style="color:var(--green);">★ Your Strengths</h4>
+          <div id="res-strengths"></div>
+        </div>
+        <div class="result-section">
+          <h4 style="color:var(--gold);">⚑ Study These</h4>
+          <div id="res-study"></div>
+        </div>
+      </div>
+
+      <div id="res-rec-card" class="rec-card"></div>
+
+      <div class="results-actions">
+        <button onclick="retakeQuiz()">↺ Retake the quiz</button>
+        <a href="index.html">← Back to Pack Ready</a>
+      </div>
+    </div>
+
+  </div><!-- end quiz-wrapper -->
+
+
+  <script>
+  // ─── QUESTIONS ────────────────────────────────────────────────────────────
+  const questions = [
+    // ─── FRESH MEAT BASICS ───────────────────────────────────────────────
+    {
+      id: 1, cat: 'basics', catLabel: 'Fresh Meat Basics',
+      q: "You're gearing up for your first practice. Your league requires full protective equipment. Which piece of gear specifically protects your palms AND wrist bones from fractures during falls?",
+      opts: ["Elbow pads", "Wrist guards", "Knee pads", "Helmet"],
+      ans: 1,
+      correct: "Wrist guards are the most critical safety item for new skaters. Your palms and wrists take the brunt of almost every fall as your instinct is to catch yourself. Look for guards with a hard plastic wrist brace built in — not just padding.",
+      wrong: "It's wrist guards. Your palms and wrist bones absorb the most impact in a fall since your instinct is to put your hands down. Hard plastic wrist braces (not just padded guards) make a significant difference on those first falls."
+    },
+    {
+      id: 2, cat: 'basics', catLabel: 'Fresh Meat Basics',
+      q: "A jam begins. Both jammers enter the pack and push through for the first time. This is called the 'initial pass.' Can the jammers score points on this first pass?",
+      opts: ["Yes, they score points on every pass including the first", "No — the initial pass establishes position only. Scoring starts on the second pass.", "Yes, but only if they achieve Lead Jammer status first", "Only if they exit the pack from the front"],
+      ans: 1,
+      correct: "Smart. The initial pass is pure positioning — no points change hands. Blockers know this and use the initial pass to tire out and redirect the jammer before scoring starts on the second lap.",
+      wrong: "The first pass through the pack is called the 'initial pass' — it's positioning only, no scoring. The jammer scores on their second pass through and every subsequent pass. This is why first-pass defense is so important — you're setting up the scoring situation."
+    },
+    {
+      id: 3, cat: 'basics', catLabel: 'Fresh Meat Basics',
+      q: "A jam is actively in progress. Both teams are scoring and the crowd is loud. What is the maximum time a single jam can run?",
+      opts: ["1 minute", "2 minutes", "5 minutes", "Until a penalty is called"],
+      ans: 1,
+      correct: "2-minute jams keep the game intense and constantly shifting. In practice, most jams end before the clock runs out — the Lead Jammer (first to legally exit the pack) can call off the jam at any time by tapping both hips repeatedly.",
+      wrong: "Jams have a 2-minute maximum. But a jammer with Lead status can end the jam early by tapping both hips. Most competitive jams are called off before the 2 minutes expire — which is why Lead Jammer status is such a tactical advantage."
+    },
+    {
+      id: 4, cat: 'basics', catLabel: 'Fresh Meat Basics',
+      scenario: "A blocker is frustrated. The opposing jammer keeps slipping by. On their next block attempt, the blocker makes contact with their elbow — hitting the jammer's shoulder.",
+      q: "What is the likely penalty call here?",
+      opts: ["Back Block (contact from behind)", "Forearm/Elbow penalty", "High Block (contact above the shoulder)", "No penalty — shoulder contact is legal"],
+      ans: 1,
+      correct: "Elbows and forearms are 'weapons' in derby — they're not legal blocking tools regardless of where they make contact. Legal blocking surfaces are your hip, butt, chest, and upper arm area. Lead with an elbow and you'll hear the whistle.",
+      wrong: "Elbow contact is a forearm/elbow penalty. Legal blocking uses your hip, butt, torso, and upper arm area. The elbows are considered dangerous weapons and using them to block is a foul. High Block would be contact above the shoulders specifically."
+    },
+    {
+      id: 5, cat: 'basics', catLabel: 'Fresh Meat Basics',
+      scenario: "You're the jammer. A big hip check sends you out of bounds near the back of the pack. You want to get back in play as fast as possible.",
+      q: "Where must you re-enter the track?",
+      opts: [
+        "Anywhere that's open — get back in fast",
+        "Behind all skaters you passed position-wise when you went out of bounds",
+        "At the jammer line — you have to restart",
+        "Wherever the referee designates"
+      ],
+      ans: 1,
+      correct: "Re-entering in front of anyone you passed going out is 'Cutting the Track' — one of the most commonly called penalties on new jammers. Come back in behind all of them. It costs position but skipping it costs a trip to the penalty box.",
+      wrong: "If you re-enter in front of any skater you passed while going out of bounds, that's a Track Cut penalty. Always come back behind the skaters you passed. It's painful and loses position, but penalties lose you more."
+    },
+
+    // ─── PACK AWARENESS ──────────────────────────────────────────────────
+    {
+      id: 6, cat: 'pack', catLabel: 'Pack Awareness',
+      scenario: "During a jam, the blockers from both teams start spreading apart. The officials begin watching carefully.",
+      q: "At what point is 'No Pack' officially declared?",
+      opts: [
+        "When any skater is more than 10 feet from the nearest teammate",
+        "When the largest group of blockers from both teams within 10 feet of each other no longer exists",
+        "When there's a visible gap of more than 5 feet between any two skaters",
+        "When fewer than 4 total blockers are on the track"
+      ],
+      ans: 1,
+      correct: "The pack is the largest group of blockers from BOTH teams within 10 feet of each other. 'No Pack' means that group no longer exists — the pack has genuinely split. When it's called, skaters can be out of play and it changes what everyone can do.",
+      wrong: "No Pack means the largest group of mixed-team blockers within 10 feet of each other no longer exists. It's one of the more nuanced rules, and teams sometimes deliberately engineer No Pack situations as a strategy. Understanding it gives you a genuine game advantage."
+    },
+    {
+      id: 7, cat: 'pack', catLabel: 'Pack Awareness',
+      scenario: "A blocker is sprinting 35 feet ahead of the front of the pack, trying to get into position.",
+      q: "What is this blocker's status?",
+      opts: [
+        "Legal — fast skating is encouraged",
+        "Out of Play — they cannot legally block or be blocked",
+        "They receive an automatic penalty for leaving the pack",
+        "They become the lead blocker by being furthest forward"
+      ],
+      ans: 1,
+      correct: "The engagement zone extends 20 feet ahead of the front of the pack and 20 feet behind the back. 35 feet puts you well outside it. You're Out of Play — you can physically be there, but you can't block or be blocked. Get back.",
+      wrong: "The engagement zone is 20 feet in front of and 20 feet behind the pack. 35 feet forward puts you outside it. Out of Play means you're temporarily irrelevant — no blocking, no being blocked. Skaters often go Out of Play by accident and don't realize it."
+    },
+    {
+      id: 8, cat: 'pack', catLabel: 'Pack Awareness',
+      scenario: "You're a blocker, Out of Play at the back of the pack. The opposing jammer skates all the way back to where you are.",
+      q: "Can the jammer legally engage you at this distance?",
+      opts: [
+        "Yes — the jammer can engage anywhere on the track",
+        "No — both you and the jammer are outside the engagement zone",
+        "Yes — jammers are always in the engagement zone",
+        "Only if you make the first contact"
+      ],
+      ans: 1,
+      correct: "Out of Play applies to everyone, including jammers. If the jammer has moved outside the engagement zone to reach you, neither of you can legally engage. Both of you need to skate back to pack range before contact is legal.",
+      wrong: "Jammers aren't automatically in the engagement zone everywhere on the track. If a jammer moves 35+ feet away from the pack, they're Out of Play too. Out-of-bounds contact is illegal regardless of who initiates it."
+    },
+    {
+      id: 9, cat: 'pack', catLabel: 'Pack Awareness',
+      q: "Which of the following block attempts is ILLEGAL and will draw a penalty?",
+      opts: [
+        "Blocking with your hip into an opponent's hip",
+        "Blocking with your shoulder into an opponent's upper arm",
+        "Extending your forearm to push an opponent sideways",
+        "Using your chest to slow down a skater in front of you"
+      ],
+      ans: 2,
+      correct: "Forearms and elbows are not legal contact tools. Your legal blocking surfaces are: hip, butt, torso, chest, upper arm. The forearm is specifically off limits — using it to push or redirect an opponent is a penalty, regardless of force.",
+      wrong: "Extending the forearm to push is a forearm penalty. Legal blocking contact zones: hip, butt, torso, chest, upper arm. Your elbows and forearms — no. They're classified as dangerous body parts for blocking and using them draws fouls consistently."
+    },
+    {
+      id: 10, cat: 'pack', catLabel: 'Pack Awareness',
+      q: "Which skater on each team wears a striped helmet cover — and what makes their role unique?",
+      opts: [
+        "The Jammer — they wear the star",
+        "The Pivot — they lead the pack and are the only blocker who can become the jammer mid-jam",
+        "The Captain — designated by the team before the jam",
+        "The blocker closest to the front of the pack"
+      ],
+      ans: 1,
+      correct: "The pivot wears the stripe. They set pack pace and direction — and uniquely, they can accept a Star Pass from the jammer, instantly becoming the new jammer. It's a major tactical tool. The original jammer then drops back to blocker status.",
+      wrong: "The pivot wears the striped helmet cover. Beyond leading the pack, they're the only blocker eligible to receive a Star Pass and become the jammer mid-jam. If your jammer is trapped or exhausted, the pivot can suddenly appear as a fresh scoring threat."
+    },
+
+    // ─── JAMMER STRATEGY ─────────────────────────────────────────────────
+    {
+      id: 11, cat: 'strategy', catLabel: 'Jammer Strategy',
+      scenario: "Your jammer is on their scoring pass. The opposing team has all 4 non-jammer skaters on the track (3 blockers and 1 pivot). Your jammer legally passes all four of them.",
+      q: "How many points does your team score on this pass?",
+      opts: [
+        "3 points (the pivot doesn't count, only blockers do)",
+        "4 points — one point for each opposing non-jammer skater on the track",
+        "5 points (4 skaters plus a bonus for completing the pass)",
+        "4 points only if the jammer has Lead Jammer status"
+      ],
+      ans: 1,
+      correct: "One point per opposing non-jammer skater passed legally. 3 blockers + 1 pivot = 4 points. Important note: any opposing skater in the penalty box at the moment your jammer passes their position does NOT count toward your score.",
+      wrong: "Scoring is 1 point per opposing skater (non-jammer) passed legally. The pivot counts the same as any blocker for scoring purposes. 3 blockers + 1 pivot = 4 points. Penalty box skaters don't count — only who's actually on the track."
+    },
+    {
+      id: 12, cat: 'strategy', catLabel: 'Jammer Strategy',
+      q: "Your jammer exits the pack first and earns Lead Jammer status. The referee signals it. What specific advantage does this give your jammer?",
+      opts: [
+        "They score double points for the rest of the jam",
+        "They can call off the jam at any time by tapping both hips",
+        "Opposing blockers cannot legally target them for the rest of the jam",
+        "They automatically get one additional point added to their score"
+      ],
+      ans: 1,
+      correct: "Lead Jammer is about control, not bonus points. The ability to end the jam on your terms is enormously powerful — you lock in your scoring advantage before the opponent can catch up. Smart jammers use this aggressively.",
+      wrong: "Lead Jammer status grants the jammer the power to call off the jam — not bonus points or protection. Tapping both hips ends the jam. This is a timing and strategy weapon: you score what you want, then close the door before they can respond."
+    },
+    {
+      id: 13, cat: 'strategy', catLabel: 'Jammer Strategy',
+      scenario: "Your jammer is exhausted and pinned in the middle of the pack. They hand their star helmet cover to your team's pivot, who accepts it.",
+      q: "What just happened, and what is the immediate effect?",
+      opts: [
+        "The pivot can now assist the jammer in breaking through — both can score",
+        "The pivot is now the jammer. The original jammer becomes a blocker. A Star Pass.",
+        "The move is illegal — only the jammer can carry the star",
+        "The jam is automatically called off when the star transfers"
+      ],
+      ans: 1,
+      correct: "A Star Pass is a legitimate tactical move. The pivot immediately becomes the jammer — they can now score. The original jammer drops to blocker. It's a powerful play when your jammer is trapped, fatigued, or in a bad position and your pivot has more space.",
+      wrong: "A Star Pass transfers jammer status from the jammer to the pivot. Once the pivot accepts the star, they're the jammer. The original jammer is now a blocker. It's a major in-game tactic — often used when a jammer is trapped and the pivot has a cleaner path."
+    },
+    {
+      id: 14, cat: 'strategy', catLabel: 'Jammer Strategy',
+      scenario: "The opposing jammer commits a major foul and is sent to the penalty box. Your jammer is still on the track — this is now a Power Jam.",
+      q: "What is true about your team's scoring during a Power Jam?",
+      opts: [
+        "Your jammer scores double points since the opponent is penalized",
+        "Your jammer can score up to 4 points per pass on the opposing skaters on the track",
+        "A Power Jam automatically grants your team 4 points",
+        "Your jammer can only score on the opposing pivot, not blockers"
+      ],
+      ans: 1,
+      correct: "Power Jams are momentum swings, not automatic scores. Your jammer still has to get through 4 opposing blockers. But with no opposing jammer to stop you from recycling, you can score 4 points per lap repeatedly until the penalty expires. This is where leads are built.",
+      wrong: "Power Jams don't grant automatic points or doubles. Your jammer still has to physically pass all 4 opposing non-jammer skaters (who are still blocking hard). The advantage is you can lap repeatedly at 4 pts/pass with no opposing jammer countering you."
+    },
+    {
+      id: 15, cat: 'strategy', catLabel: 'Jammer Strategy',
+      scenario: "You're the jammer. You have Lead Jammer status. You've just completed a clean scoring pass worth 4 points. The jam clock shows 40 seconds. The opposing jammer is starting to close on Lead status.",
+      q: "What is the strategically correct move?",
+      opts: [
+        "Keep going — 40 seconds is enough time to score another 4 points",
+        "Call off the jam now — lock in your scoring advantage",
+        "Pass the star to your pivot since they're in better position",
+        "Try to draw a penalty on the opposing jammer to extend your advantage"
+      ],
+      ans: 1,
+      correct: "Lead Jammer strategy is fundamentally about locking in advantages. 4 points in the bank. Opposing jammer is approaching. Forty seconds is enough time for things to go wrong. Call it off. A locked-in 4 beats a contested 6.",
+      wrong: "Lead Jammer is a timing weapon. Smart jammers call off jams when they've scored what they can safely score. Staying in hoping for more often gives the opponent time to respond — penalties happen, blockers regroup, situations change. Lock in the lead."
+    }
+  ];
+
+  // ─── STATE ────────────────────────────────────────────────────────────────
+  let currentQ   = 0;
+  let answers    = []; // {correct: bool, cat: string}
+  let answered   = false;
+  const catMap   = { basics: 0, pack: 0, strategy: 0 };
+  const catTotal = { basics: 5, pack: 5, strategy: 5 };
+
+  // ─── START ────────────────────────────────────────────────────────────────
+  function startQuiz() {
+    currentQ = 0; answers = []; answered = false;
+    catMap.basics = 0; catMap.pack = 0; catMap.strategy = 0;
+    showScreen('screen-question');
+    buildDots();
+    renderQuestion();
+  }
+
+  // ─── BUILD DOTS ───────────────────────────────────────────────────────────
+  function buildDots() {
+    const container = document.getElementById('q-dots');
+    container.innerHTML = '';
+    questions.forEach((_, i) => {
+      const d = document.createElement('div');
+      d.className = 'q-dot' + (i === 0 ? ' current' : '');
+      d.id = 'dot-' + i;
+      container.appendChild(d);
+    });
+  }
+
+  function updateDots(idx, correct) {
+    const curr = document.getElementById('dot-' + idx);
+    if (curr) curr.className = 'q-dot ' + (correct ? 'done-correct' : 'done-wrong');
+    const next = document.getElementById('dot-' + (idx + 1));
+    if (next) next.className = 'q-dot current';
+  }
+
+  // ─── RENDER QUESTION ─────────────────────────────────────────────────────
+  function renderQuestion() {
+    const q = questions[currentQ];
+    answered = false;
+
+    // Progress
+    const pct = Math.round((currentQ / 15) * 100);
+    document.getElementById('q-progress-bar').style.width = pct + '%';
+    document.getElementById('q-progress-label').textContent = 'Question ' + (currentQ + 1) + ' of 15';
+    const scored = answers.filter(a => a.correct).length;
+    document.getElementById('q-score-running').textContent = scored > 0 ? scored + ' correct so far' : '';
+
+    // Category tag
+    const tag = document.getElementById('q-category-tag');
+    tag.textContent = q.catLabel;
+    tag.className = 'q-category-tag ' + (q.cat === 'basics' ? 'cat-basics' : q.cat === 'pack' ? 'cat-pack' : 'cat-strategy');
+
+    // Scenario
+    const scenarioEl = document.getElementById('q-scenario');
+    if (q.scenario) {
+      scenarioEl.textContent = q.scenario;
+      scenarioEl.style.display = 'block';
+    } else {
+      scenarioEl.style.display = 'none';
+    }
+
+    // Question text
+    document.getElementById('q-text').textContent = q.q;
+
+    // Options
+    const optList = document.getElementById('q-options');
+    const letters = ['A', 'B', 'C', 'D'];
+    optList.innerHTML = q.opts.map((opt, i) =>
+      `<button class="option-btn" id="opt-${i}" onclick="selectAnswer(${i})">
+        <span class="option-letter">${letters[i]}</span>
+        <span>${opt}</span>
+      </button>`
+    ).join('');
+
+    // Feedback + next
+    document.getElementById('q-feedback').style.display = 'none';
+    document.getElementById('btn-next').style.display = 'none';
+  }
+
+  // ─── SELECT ANSWER ────────────────────────────────────────────────────────
+  function selectAnswer(idx) {
+    if (answered) return;
+    answered = true;
+
+    const q = questions[currentQ];
+    const isCorrect = idx === q.ans;
+
+    // Record
+    answers.push({ correct: isCorrect, cat: q.cat });
+    if (isCorrect) catMap[q.cat]++;
+
+    // Disable all buttons
+    const opts = document.querySelectorAll('.option-btn');
+    opts.forEach(b => b.disabled = true);
+
+    // Style selected
+    const selected = document.getElementById('opt-' + idx);
+    selected.classList.add(isCorrect ? 'correct' : 'wrong');
+
+    // If wrong, reveal correct
+    if (!isCorrect) {
+      document.getElementById('opt-' + q.ans).classList.add('reveal-correct');
+    }
+
+    // Feedback
+    const fb = document.getElementById('q-feedback');
+    fb.innerHTML = `
+      <div class="feedback-box ${isCorrect ? 'fb-correct' : 'fb-wrong'}">
+        <div class="feedback-label ${isCorrect ? 'fl-correct' : 'fl-wrong'}">${isCorrect ? '✓ Correct' : '✗ Not quite'}</div>
+        <div class="feedback-text">${isCorrect ? q.correct : q.wrong}</div>
+        ${!isCorrect ? `<div class="feedback-tip"><strong>On the track:</strong> Knowing this rule will directly prevent penalties when you're in that situation. Worth re-reading in the guide.</div>` : ''}
+      </div>`;
+    fb.style.display = 'block';
+
+    // Update dot
+    updateDots(currentQ, isCorrect);
+
+    // Next button
+    const btnNext = document.getElementById('btn-next');
+    btnNext.style.display = 'flex';
+    btnNext.textContent = currentQ === 14 ? 'See My Results →' : 'Next Question →';
+  }
+
+  // ─── NEXT QUESTION ────────────────────────────────────────────────────────
+  function nextQuestion() {
+    currentQ++;
+    if (currentQ >= questions.length) {
+      showResults();
+    } else {
+      renderQuestion();
+      window.scrollTo({ top: 0, behavior: 'smooth' });
+    }
+  }
+
+  // ─── SHOW RESULTS ─────────────────────────────────────────────────────────
+  function showResults() {
+    showScreen('screen-results');
+    window.scrollTo({ top: 0, behavior: 'smooth' });
+
+    const total = answers.filter(a => a.correct).length;
+    const pct   = Math.round((total / 15) * 100);
+
+    // Score circle
+    document.getElementById('res-score-num').textContent = total;
+    const circle = document.getElementById('res-score-circle');
+    if (pct >= 80) circle.style.borderColor = 'var(--green)';
+    else if (pct >= 50) circle.style.borderColor = 'var(--gold)';
+    else circle.style.borderColor = 'var(--pink)';
+
+    // Headline + sub
+    let headline, sub;
+    if (pct >= 85) { headline = "You Know Your Derby."; sub = "Strong rules knowledge across the board. Your focus now is getting this onto the track — where knowing the rules and skating the rules are different things."; }
+    else if (pct >= 65) { headline = "Solid Foundation."; sub = "You've got the basics and some of the finer points. A few areas to shore up before you're bout-ready on the knowledge side."; }
+    else if (pct >= 45) { headline = "Getting There."; sub = "You know more than you think, but there are gaps worth closing before your first assessment. The guide was built for exactly where you are."; }
+    else { headline = "Fresh Meat Mode."; sub = "Derby rules are genuinely complex — this is a hard quiz. Everyone starts here. The guide covers every topic on this test in plain language, with examples from real game situations."; }
+    document.getElementById('res-headline').textContent = headline;
+    document.getElementById('res-sub').textContent = sub;
+
+    // Category scores
+    const catPcts = {
+      basics:   Math.round((catMap.basics   / catTotal.basics)   * 100),
+      pack:     Math.round((catMap.pack     / catTotal.pack)     * 100),
+      strategy: Math.round((catMap.strategy / catTotal.strategy) * 100)
+    };
+
+    setTimeout(() => {
+      document.getElementById('res-basics-score').textContent   = catMap.basics   + '/5 (' + catPcts.basics   + '%)';
+      document.getElementById('res-pack-score').textContent     = catMap.pack     + '/5 (' + catPcts.pack     + '%)';
+      document.getElementById('res-strategy-score').textContent = catMap.strategy + '/5 (' + catPcts.strategy + '%)';
+      document.getElementById('res-basics-bar').style.width     = catPcts.basics   + '%';
+      document.getElementById('res-pack-bar').style.width       = catPcts.pack     + '%';
+      document.getElementById('res-strategy-bar').style.width   = catPcts.strategy + '%';
+    }, 100);
+
+    // Strengths + Study
+    const catLabels = { basics: 'Fresh Meat Basics', pack: 'Pack Awareness', strategy: 'Jammer Strategy' };
+    const catColors = { basics: 'var(--pink)', pack: 'var(--gold)', strategy: 'var(--green)' };
+    const strengths = Object.keys(catPcts).filter(k => catPcts[k] >= 70);
+    const study     = Object.keys(catPcts).filter(k => catPcts[k] < 60);
+
+    const strEl = document.getElementById('res-strengths');
+    if (strengths.length) {
+      strEl.innerHTML = strengths.map(k =>
+        `<div class="result-section-item"><span class="dot" style="background:${catColors[k]}"></span>${catLabels[k]} (${catPcts[k]}%)</div>`
+      ).join('');
+    } else {
+      strEl.innerHTML = '<div class="result-section-item" style="color:var(--gray);">Keep practicing — strengths are earned, not given.</div>';
+    }
+
+    const stuEl = document.getElementById('res-study');
+    if (study.length) {
+      const tips = {
+        basics: 'Sections 2, 4, and 5 of the guide cover gear, skating fundamentals, and game rules.',
+        pack: 'Section 5.4 covers pack rules, engagement zone, and out-of-play calls in detail.',
+        strategy: 'Section 5.5 covers jammer scoring, lead jammer, star pass, and power jams.'
+      };
+      stuEl.innerHTML = study.map(k =>
+        `<div class="result-section-item"><span class="dot" style="background:var(--gold)"></span><span><strong style="color:var(--white)">${catLabels[k]}</strong><br><span style="font-size:12px;">${tips[k]}</span></span></div>`
+      ).join('');
+    } else {
+      stuEl.innerHTML = '<div class="result-section-item" style="color:var(--gray);">Nothing critical — keep sharpening your weaker categories.</div>';
+    }
+
+    // Product recommendation
+    const recEl = document.getElementById('res-rec-card');
+    let recTier, recTitle, recDesc, recCta, recCtaUrl, recCta2, recCta2Url;
+
+    if (pct < 45 || catPcts.basics < 50) {
+      recTier = 'guide'; recTitle = 'Start with the Pack Ready Guide';
+      recDesc = 'Every rule, scenario, and situation on this quiz is covered in the guide — in plain language, with real examples from game play. Section 5 ("Understanding the Game") is exactly what you need. Read it before your first bout.';
+      recCta = 'Get the Guide — $35'; recCtaUrl = '#';
+      recCta2 = 'Learn more'; recCta2Url = 'index.html#pricing';
+    } else if (pct < 70 || study.length >= 2) {
+      recTier = 'bundle'; recTitle = 'Get the Guide + App Bundle';
+      recDesc = 'Your foundation is there. The gaps you have are fixable — and the guide covers them exactly. Once you\'re on the track, the app will help you connect the theory to actual skill progression.';
+      recCta = 'Get the Bundle — $100'; recCtaUrl = '#';
+      recCta2 = 'See what\'s included'; recCta2Url = 'index.html#pricing';
+    } else {
+      recTier = 'app'; recTitle = 'You\'re Ready for the App';
+      recDesc = 'Your rules knowledge is solid. The bottleneck now is getting those skills onto the track and tracking your actual progress. The app tracks all 33 minimum skills, your practice sessions, and every milestone.';
+      recCta = 'Join the Waitlist'; recCtaUrl = 'index.html#waitlist';
+      recCta2 = 'Get the Guide too'; recCta2Url = 'index.html#pricing';
+    }
+
+    recEl.className = 'rec-card rc-' + recTier;
+    const eyeColors = { guide: 'var(--pink)', bundle: 'var(--gold)', app: 'var(--green)' };
+    recEl.innerHTML = `
+      <div class="rec-eyebrow" style="color:${eyeColors[recTier]}">Based on Your Results</div>
+      <div class="rec-title">${recTitle}</div>
+      <div class="rec-desc">${recDesc}</div>
+      <div class="rec-btns">
+        <a href="${recCtaUrl}" class="btn-primary" style="font-size:14px;">${recCta}</a>
+        <a href="${recCta2Url}" class="btn-outline" style="font-size:13px;">${recCta2}</a>
+      </div>`;
+  }
+
+  // ─── RETAKE ───────────────────────────────────────────────────────────────
+  function retakeQuiz() {
+    startQuiz();
+    window.scrollTo({ top: 0, behavior: 'smooth' });
+  }
+
+  // ─── SCREEN SWITCHER ──────────────────────────────────────────────────────
+  function showScreen(id) {
+    document.querySelectorAll('.screen').forEach(s => s.classList.remove('active'));
+    document.getElementById(id).classList.add('active');
+  }
+  </script>
+
+</body>
+</html>

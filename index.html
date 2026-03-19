@@ -1,0 +1,2751 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Pack Ready | The Complete Roller Derby Starter Guide & App</title>
+  <meta name="description" content="Everything a new roller derby skater needs to get from zero to the track. The Pack Ready guide and app cover gear, skills, rules, culture, and MSR prep." />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Inter:wght@400;500;600;700;800;900&display=swap" rel="stylesheet" />
+
+  <style>
+    /* =============================================
+       TOKENS & RESET
+    ============================================= */
+    :root {
+      --black:      #111111;
+      --black-soft: #1a1a1a;
+      --black-card: #1f1f1f;
+      --black-border:#2a2a2a;
+      --pink:       #EC4899;
+      --pink-dark:  #be185d;
+      --pink-glow:  rgba(236,72,153,0.18);
+      --gold:       #EAB308;
+      --gold-light: #fef3c7;
+      --white:      #F9FAFB;
+      --white-soft: #d1d5db;
+      --gray:       #6b7280;
+      --gray-dark:  #374151;
+
+      --font-display: 'Bebas Neue', sans-serif;
+      --font-body:    'Inter', sans-serif;
+
+      --radius-sm: 8px;
+      --radius-md: 14px;
+      --radius-lg: 24px;
+      --radius-xl: 40px;
+
+      --max-w: 1100px;
+      --section-pad: 96px 24px;
+    }
+
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    html { scroll-behavior: smooth; }
+
+    body {
+      background: var(--black);
+      color: var(--white);
+      font-family: var(--font-body);
+      font-size: 16px;
+      line-height: 1.6;
+      overflow-x: hidden;
+    }
+
+    img { max-width: 100%; display: block; }
+    a { text-decoration: none; color: inherit; }
+
+    .container {
+      max-width: var(--max-w);
+      margin: 0 auto;
+      padding: 0 24px;
+    }
+
+    /* =============================================
+       BUTTONS
+    ============================================= */
+    .btn {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      padding: 14px 28px;
+      border-radius: var(--radius-sm);
+      font-family: var(--font-body);
+      font-size: 15px;
+      font-weight: 700;
+      cursor: pointer;
+      border: none;
+      transition: transform 0.15s ease, box-shadow 0.15s ease, background 0.15s ease;
+      letter-spacing: 0.3px;
+    }
+    .btn:hover { transform: translateY(-2px); }
+    .btn:active { transform: translateY(0); }
+
+    .btn-primary {
+      background: var(--pink);
+      color: #fff;
+      box-shadow: 0 4px 20px rgba(236,72,153,0.35);
+    }
+    .btn-primary:hover {
+      background: var(--pink-dark);
+      box-shadow: 0 8px 30px rgba(236,72,153,0.5);
+    }
+
+    .btn-gold {
+      background: var(--gold);
+      color: #111;
+      box-shadow: 0 4px 20px rgba(234,179,8,0.3);
+    }
+    .btn-gold:hover {
+      background: #d97706;
+      box-shadow: 0 8px 30px rgba(234,179,8,0.45);
+    }
+
+    .btn-outline {
+      background: transparent;
+      color: var(--white);
+      border: 1.5px solid var(--black-border);
+    }
+    .btn-outline:hover {
+      border-color: var(--pink);
+      color: var(--pink);
+    }
+
+    .btn-large {
+      padding: 18px 36px;
+      font-size: 16px;
+      border-radius: var(--radius-md);
+    }
+
+    /* =============================================
+       TYPOGRAPHY UTILITIES
+    ============================================= */
+    .display { font-family: var(--font-display); letter-spacing: 0.02em; line-height: 0.95; }
+    .text-pink  { color: var(--pink); }
+    .text-gold  { color: var(--gold); }
+    .text-gray  { color: var(--white-soft); }
+    .text-muted { color: var(--gray); }
+
+    .tag {
+      display: inline-block;
+      padding: 4px 12px;
+      border-radius: 20px;
+      font-size: 11px;
+      font-weight: 700;
+      letter-spacing: 1.5px;
+      text-transform: uppercase;
+    }
+    .tag-pink   { background: var(--pink-glow); color: var(--pink); border: 1px solid rgba(236,72,153,0.3); }
+    .tag-gold   { background: rgba(234,179,8,0.12); color: var(--gold); border: 1px solid rgba(234,179,8,0.3); }
+    .tag-white  { background: rgba(255,255,255,0.07); color: var(--white-soft); border: 1px solid rgba(255,255,255,0.12); }
+
+    /* =============================================
+       NAV
+    ============================================= */
+    nav {
+      position: fixed;
+      top: 0; left: 0; right: 0;
+      z-index: 100;
+      background: rgba(17,17,17,0.88);
+      backdrop-filter: blur(16px);
+      -webkit-backdrop-filter: blur(16px);
+      border-bottom: 1px solid var(--black-border);
+      transition: background 0.3s;
+    }
+
+    .nav-inner {
+      max-width: var(--max-w);
+      margin: 0 auto;
+      padding: 0 24px;
+      height: 64px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+    }
+
+    .nav-logo {
+      font-family: var(--font-display);
+      font-size: 26px;
+      letter-spacing: 0.05em;
+      color: var(--white);
+    }
+    .nav-logo span { color: var(--pink); }
+
+    .nav-links {
+      display: flex;
+      align-items: center;
+      gap: 32px;
+      list-style: none;
+    }
+
+    .nav-links a {
+      font-size: 14px;
+      font-weight: 500;
+      color: var(--white-soft);
+      transition: color 0.2s;
+    }
+    .nav-links a:hover { color: var(--white); }
+
+    .nav-cta { display: flex; align-items: center; gap: 12px; }
+
+    .nav-hamburger {
+      display: none;
+      flex-direction: column;
+      gap: 5px;
+      cursor: pointer;
+      padding: 4px;
+    }
+    .nav-hamburger span {
+      display: block;
+      width: 24px;
+      height: 2px;
+      background: var(--white);
+      border-radius: 2px;
+      transition: 0.3s;
+    }
+
+    /* =============================================
+       HERO
+    ============================================= */
+    .hero {
+      min-height: 100vh;
+      display: flex;
+      align-items: center;
+      padding: 120px 24px 80px;
+      position: relative;
+      overflow: hidden;
+    }
+
+    /* Animated background grid */
+    .hero::before {
+      content: '';
+      position: absolute;
+      inset: 0;
+      background-image:
+        linear-gradient(rgba(236,72,153,0.04) 1px, transparent 1px),
+        linear-gradient(90deg, rgba(236,72,153,0.04) 1px, transparent 1px);
+      background-size: 60px 60px;
+      animation: gridDrift 20s linear infinite;
+    }
+    @keyframes gridDrift {
+      0%   { transform: translate(0,0); }
+      100% { transform: translate(60px, 60px); }
+    }
+
+    /* Pink glow orb */
+    .hero::after {
+      content: '';
+      position: absolute;
+      top: -200px;
+      right: -200px;
+      width: 600px;
+      height: 600px;
+      border-radius: 50%;
+      background: radial-gradient(circle, rgba(236,72,153,0.15) 0%, transparent 70%);
+      pointer-events: none;
+    }
+
+    .hero-inner {
+      position: relative;
+      z-index: 1;
+      max-width: var(--max-w);
+      margin: 0 auto;
+      width: 100%;
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 64px;
+      align-items: center;
+    }
+
+    .hero-eyebrow {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      margin-bottom: 24px;
+    }
+
+    .hero-title {
+      font-size: clamp(56px, 8vw, 96px);
+      margin-bottom: 24px;
+      color: var(--white);
+    }
+    .hero-title .line-pink { color: var(--pink); }
+    .hero-title .line-gold { color: var(--gold); }
+
+    .hero-sub {
+      font-size: 18px;
+      line-height: 1.65;
+      color: var(--white-soft);
+      margin-bottom: 36px;
+      max-width: 480px;
+    }
+
+    .hero-ctas {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 14px;
+      margin-bottom: 40px;
+    }
+
+    .hero-stats {
+      display: flex;
+      gap: 32px;
+      padding-top: 40px;
+      border-top: 1px solid var(--black-border);
+    }
+
+    .hero-stat-num {
+      font-family: var(--font-display);
+      font-size: 36px;
+      color: var(--pink);
+      line-height: 1;
+    }
+    .hero-stat-label {
+      font-size: 12px;
+      color: var(--gray);
+      margin-top: 4px;
+      text-transform: uppercase;
+      letter-spacing: 0.8px;
+    }
+
+    /* Hero visual */
+    .hero-visual {
+      position: relative;
+    }
+
+    .hero-card-main {
+      background: var(--black-card);
+      border: 1px solid var(--black-border);
+      border-radius: var(--radius-lg);
+      padding: 32px;
+      box-shadow: 0 24px 80px rgba(0,0,0,0.6), 0 0 40px var(--pink-glow);
+      position: relative;
+      overflow: hidden;
+    }
+
+    .hero-card-main::before {
+      content: '';
+      position: absolute;
+      top: 0; left: 0; right: 0;
+      height: 3px;
+      background: linear-gradient(90deg, var(--pink), var(--gold));
+    }
+
+    .guide-cover-preview {
+      background: linear-gradient(135deg, #1a1a1a 0%, #111 100%);
+      border: 1px solid #2a2a2a;
+      border-radius: var(--radius-md);
+      padding: 28px 24px;
+      margin-bottom: 20px;
+      text-align: center;
+      position: relative;
+      overflow: hidden;
+    }
+    .guide-cover-preview::before {
+      content: '';
+      position: absolute;
+      top: 0; left: 0; right: 0;
+      height: 100%;
+      background: linear-gradient(135deg, var(--pink-glow) 0%, transparent 60%);
+    }
+
+    .guide-cover-stars {
+      font-size: 14px;
+      color: var(--gold);
+      margin-bottom: 12px;
+      letter-spacing: 4px;
+    }
+
+    .guide-cover-title {
+      font-family: var(--font-display);
+      font-size: 34px;
+      color: var(--white);
+      letter-spacing: 0.05em;
+      line-height: 1;
+      margin-bottom: 6px;
+    }
+    .guide-cover-sub {
+      font-size: 11px;
+      color: var(--gold);
+      letter-spacing: 1.5px;
+      text-transform: uppercase;
+    }
+    .guide-cover-divider {
+      font-size: 12px;
+      color: var(--gold);
+      margin: 12px 0;
+    }
+    .guide-cover-topics {
+      font-size: 9px;
+      color: var(--gray);
+      letter-spacing: 1.8px;
+      text-transform: uppercase;
+    }
+
+    .hero-card-meta {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+    }
+    .hero-card-pages {
+      font-size: 13px;
+      color: var(--gray);
+    }
+    .hero-card-price {
+      font-family: var(--font-display);
+      font-size: 28px;
+      color: var(--gold);
+    }
+    .hero-card-price-note {
+      font-size: 11px;
+      color: var(--gray);
+    }
+
+    /* Floating badge */
+    .float-badge {
+      position: absolute;
+      top: -16px;
+      right: -16px;
+      background: var(--pink);
+      color: #fff;
+      font-weight: 800;
+      font-size: 11px;
+      letter-spacing: 0.5px;
+      padding: 8px 14px;
+      border-radius: 20px;
+      box-shadow: 0 4px 16px rgba(236,72,153,0.5);
+      text-transform: uppercase;
+    }
+
+    /* =============================================
+       SOCIAL PROOF TICKER
+    ============================================= */
+    .ticker {
+      background: var(--pink);
+      padding: 12px 0;
+      overflow: hidden;
+      white-space: nowrap;
+    }
+    .ticker-inner {
+      display: inline-flex;
+      animation: ticker 30s linear infinite;
+    }
+    .ticker-item {
+      font-weight: 700;
+      font-size: 13px;
+      letter-spacing: 1px;
+      text-transform: uppercase;
+      padding: 0 32px;
+      color: #fff;
+    }
+    .ticker-dot { color: rgba(255,255,255,0.5); }
+    @keyframes ticker {
+      0%   { transform: translateX(0); }
+      100% { transform: translateX(-50%); }
+    }
+
+    /* =============================================
+       SECTION SHARED STYLES
+    ============================================= */
+    section { padding: var(--section-pad); }
+
+    .section-eyebrow {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      margin-bottom: 16px;
+    }
+
+    .section-title {
+      font-size: clamp(36px, 5vw, 60px);
+      margin-bottom: 16px;
+      line-height: 0.95;
+    }
+
+    .section-sub {
+      font-size: 18px;
+      color: var(--white-soft);
+      max-width: 560px;
+      line-height: 1.65;
+    }
+
+    .section-header { margin-bottom: 56px; }
+    .section-header-center { text-align: center; margin-bottom: 56px; }
+    .section-header-center .section-sub { margin: 0 auto; }
+
+    /* =============================================
+       WHO IT'S FOR
+    ============================================= */
+    .for-section { background: var(--black-soft); }
+
+    .archetypes-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+      gap: 20px;
+    }
+
+    .archetype-card {
+      background: var(--black-card);
+      border: 1px solid var(--black-border);
+      border-radius: var(--radius-md);
+      padding: 28px 24px;
+      transition: border-color 0.2s, transform 0.2s;
+    }
+    .archetype-card:hover {
+      border-color: var(--pink);
+      transform: translateY(-4px);
+    }
+
+    .archetype-icon {
+      font-size: 28px;
+      margin-bottom: 14px;
+    }
+    .archetype-title {
+      font-weight: 800;
+      font-size: 15px;
+      color: var(--white);
+      margin-bottom: 8px;
+    }
+    .archetype-desc {
+      font-size: 13px;
+      color: var(--gray);
+      line-height: 1.6;
+    }
+
+    /* =============================================
+       WHAT'S INSIDE (GUIDE)
+    ============================================= */
+    .inside-section {}
+
+    .inside-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 48px;
+      align-items: start;
+    }
+
+    .inside-chapters { display: flex; flex-direction: column; gap: 8px; }
+
+    .chapter-row {
+      display: flex;
+      align-items: flex-start;
+      gap: 16px;
+      padding: 16px 20px;
+      background: var(--black-card);
+      border: 1px solid var(--black-border);
+      border-radius: var(--radius-sm);
+      transition: border-color 0.2s;
+      cursor: default;
+    }
+    .chapter-row:hover { border-color: rgba(236,72,153,0.4); }
+
+    .chapter-num {
+      font-family: var(--font-display);
+      font-size: 22px;
+      color: var(--pink);
+      min-width: 28px;
+      line-height: 1;
+      padding-top: 2px;
+    }
+    .chapter-title {
+      font-weight: 700;
+      font-size: 14px;
+      color: var(--white);
+      margin-bottom: 4px;
+    }
+    .chapter-desc {
+      font-size: 12px;
+      color: var(--gray);
+    }
+
+    .inside-visual {
+      position: sticky;
+      top: 90px;
+    }
+
+    .guide-mockup {
+      background: var(--black-card);
+      border: 1px solid var(--black-border);
+      border-radius: var(--radius-lg);
+      padding: 36px;
+      box-shadow: 0 24px 80px rgba(0,0,0,0.5);
+      position: relative;
+      overflow: hidden;
+    }
+    .guide-mockup::before {
+      content: '';
+      position: absolute;
+      inset: 0;
+      background: radial-gradient(ellipse at top left, var(--pink-glow) 0%, transparent 60%);
+      pointer-events: none;
+    }
+    .guide-mockup-header {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      margin-bottom: 24px;
+    }
+    .mock-dot {
+      width: 10px; height: 10px;
+      border-radius: 50%;
+    }
+
+    .guide-page-preview {
+      background: #0d0d0d;
+      border-radius: var(--radius-sm);
+      padding: 20px;
+      margin-bottom: 16px;
+    }
+    .preview-section-label {
+      font-size: 9px;
+      letter-spacing: 2px;
+      text-transform: uppercase;
+      color: var(--pink);
+      margin-bottom: 6px;
+    }
+    .preview-section-heading {
+      font-family: var(--font-display);
+      font-size: 22px;
+      color: var(--white);
+      margin-bottom: 10px;
+    }
+    .preview-body-lines { display: flex; flex-direction: column; gap: 5px; }
+    .preview-line {
+      height: 8px;
+      border-radius: 4px;
+      background: rgba(255,255,255,0.08);
+    }
+    .preview-line.short { width: 65%; }
+    .preview-line.mid   { width: 85%; }
+    .preview-line.full  { width: 100%; }
+
+    .skill-star-row {
+      display: flex;
+      gap: 8px;
+      align-items: center;
+      margin-top: 14px;
+      padding: 10px 14px;
+      background: rgba(234,179,8,0.08);
+      border-radius: var(--radius-sm);
+      border: 1px solid rgba(234,179,8,0.2);
+    }
+    .skill-star-label { font-size: 12px; color: var(--gold-light); font-weight: 600; }
+    .skill-stars { color: var(--gold); font-size: 12px; letter-spacing: 1px; }
+
+    .guide-stats-row {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 12px;
+    }
+    .guide-stat {
+      text-align: center;
+      padding: 16px 12px;
+      background: rgba(236,72,153,0.06);
+      border: 1px solid rgba(236,72,153,0.15);
+      border-radius: var(--radius-sm);
+    }
+    .guide-stat-num {
+      font-family: var(--font-display);
+      font-size: 28px;
+      color: var(--pink);
+    }
+    .guide-stat-label {
+      font-size: 10px;
+      color: var(--gray);
+      text-transform: uppercase;
+      letter-spacing: 0.8px;
+      margin-top: 2px;
+    }
+
+    /* =============================================
+       APP SECTION
+    ============================================= */
+    .app-section { background: var(--black-soft); }
+
+    .app-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 64px;
+      align-items: center;
+    }
+
+    .app-features { display: flex; flex-direction: column; gap: 24px; }
+
+    .app-feature {
+      display: flex;
+      gap: 16px;
+      align-items: flex-start;
+    }
+    .app-feature-icon {
+      width: 44px;
+      height: 44px;
+      border-radius: var(--radius-sm);
+      background: var(--pink-glow);
+      border: 1px solid rgba(236,72,153,0.25);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 20px;
+      flex-shrink: 0;
+    }
+    .app-feature-title {
+      font-weight: 700;
+      font-size: 15px;
+      color: var(--white);
+      margin-bottom: 4px;
+    }
+    .app-feature-desc {
+      font-size: 13px;
+      color: var(--gray);
+      line-height: 1.6;
+    }
+
+    /* App mockup */
+    .app-mockup {
+      background: var(--black-card);
+      border: 1px solid var(--black-border);
+      border-radius: var(--radius-lg);
+      padding: 24px;
+      max-width: 340px;
+      margin: 0 auto;
+      box-shadow: 0 24px 80px rgba(0,0,0,0.5), 0 0 60px var(--pink-glow);
+      position: relative;
+      overflow: hidden;
+    }
+    .app-mockup::before {
+      content: '';
+      position: absolute;
+      top: 0; left: 0; right: 0;
+      height: 3px;
+      background: linear-gradient(90deg, var(--pink), var(--gold), var(--pink));
+    }
+
+    .app-mock-header {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      margin-bottom: 20px;
+    }
+    .app-mock-greeting {
+      font-size: 13px;
+      color: var(--gray);
+    }
+    .app-mock-name {
+      font-weight: 800;
+      font-size: 18px;
+      color: var(--white);
+    }
+    .app-mock-level {
+      background: var(--pink-glow);
+      border: 1px solid rgba(236,72,153,0.3);
+      border-radius: 20px;
+      padding: 4px 12px;
+      font-size: 11px;
+      font-weight: 700;
+      color: var(--pink);
+    }
+
+    .app-mock-progress {
+      background: #0d0d0d;
+      border-radius: var(--radius-sm);
+      padding: 16px;
+      margin-bottom: 16px;
+    }
+    .app-mock-progress-label {
+      display: flex;
+      justify-content: space-between;
+      font-size: 12px;
+      margin-bottom: 8px;
+    }
+    .app-mock-progress-label span:first-child { color: var(--white-soft); }
+    .app-mock-progress-label span:last-child { color: var(--pink); font-weight: 700; }
+    .progress-bar {
+      height: 8px;
+      background: #2a2a2a;
+      border-radius: 4px;
+      overflow: hidden;
+    }
+    .progress-fill {
+      height: 100%;
+      background: linear-gradient(90deg, var(--pink), var(--gold));
+      border-radius: 4px;
+      transition: width 1s ease;
+    }
+
+    .app-mock-skills { display: flex; flex-direction: column; gap: 8px; margin-bottom: 16px; }
+
+    .skill-row {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 10px 14px;
+      background: #0d0d0d;
+      border-radius: var(--radius-sm);
+      border: 1px solid var(--black-border);
+    }
+    .skill-row-left {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+    }
+    .skill-status {
+      width: 8px; height: 8px;
+      border-radius: 50%;
+      flex-shrink: 0;
+    }
+    .skill-status.passed   { background: #22c55e; }
+    .skill-status.progress { background: var(--gold); }
+    .skill-status.not-started { background: #374151; border: 1px solid #4b5563; }
+    .skill-name { font-size: 13px; font-weight: 500; color: var(--white-soft); }
+    .skill-conf { font-size: 11px; color: var(--gold); }
+
+    .app-mock-badges {
+      display: flex;
+      gap: 8px;
+    }
+    .badge-chip {
+      background: var(--black-card);
+      border: 1px solid var(--black-border);
+      border-radius: var(--radius-sm);
+      padding: 8px 12px;
+      text-align: center;
+      flex: 1;
+      font-size: 18px;
+      line-height: 1;
+    }
+    .badge-chip-label {
+      font-size: 9px;
+      color: var(--gray);
+      margin-top: 4px;
+      white-space: nowrap;
+    }
+    .badge-chip.earned { border-color: rgba(234,179,8,0.3); background: rgba(234,179,8,0.06); }
+
+    /* =============================================
+       TESTIMONIALS
+    ============================================= */
+    .testimonials-section { }
+
+    .testimonials-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+      gap: 24px;
+    }
+
+    .testimonial-card {
+      background: var(--black-card);
+      border: 1px solid var(--black-border);
+      border-radius: var(--radius-md);
+      padding: 32px;
+      position: relative;
+      transition: border-color 0.2s, transform 0.2s;
+    }
+    .testimonial-card:hover {
+      border-color: rgba(236,72,153,0.3);
+      transform: translateY(-4px);
+    }
+    .testimonial-card::before {
+      content: '"';
+      position: absolute;
+      top: 16px;
+      right: 24px;
+      font-family: var(--font-display);
+      font-size: 80px;
+      color: rgba(236,72,153,0.12);
+      line-height: 1;
+    }
+
+    .testimonial-stars {
+      color: var(--gold);
+      font-size: 14px;
+      letter-spacing: 2px;
+      margin-bottom: 16px;
+    }
+    .testimonial-quote {
+      font-size: 15px;
+      line-height: 1.7;
+      color: var(--white-soft);
+      margin-bottom: 24px;
+    }
+    .testimonial-author {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+    }
+    .testimonial-avatar {
+      width: 40px;
+      height: 40px;
+      border-radius: 50%;
+      background: linear-gradient(135deg, var(--pink), var(--pink-dark));
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-weight: 800;
+      font-size: 16px;
+      color: #fff;
+      flex-shrink: 0;
+    }
+    .testimonial-name {
+      font-weight: 700;
+      font-size: 14px;
+      color: var(--white);
+    }
+    .testimonial-meta {
+      font-size: 12px;
+      color: var(--gray);
+      margin-top: 2px;
+    }
+
+    /* =============================================
+       PRICING
+    ============================================= */
+    .pricing-section { background: var(--black-soft); }
+
+    .pricing-toggle {
+      display: flex;
+      align-items: center;
+      gap: 14px;
+      justify-content: center;
+      margin-bottom: 48px;
+    }
+    .pricing-toggle-label {
+      font-size: 14px;
+      font-weight: 600;
+      color: var(--white-soft);
+      cursor: pointer;
+    }
+    .pricing-toggle-label.active { color: var(--white); }
+    .toggle-switch {
+      width: 52px;
+      height: 28px;
+      background: var(--pink);
+      border-radius: 14px;
+      position: relative;
+      cursor: pointer;
+      transition: background 0.2s;
+    }
+    .toggle-knob {
+      width: 22px;
+      height: 22px;
+      background: #fff;
+      border-radius: 50%;
+      position: absolute;
+      top: 3px;
+      left: 3px;
+      transition: left 0.2s;
+    }
+    .toggle-switch.annual .toggle-knob { left: 27px; }
+    .save-badge {
+      background: rgba(234,179,8,0.15);
+      color: var(--gold);
+      border: 1px solid rgba(234,179,8,0.3);
+      border-radius: 20px;
+      padding: 2px 8px;
+      font-size: 11px;
+      font-weight: 700;
+    }
+
+    .pricing-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 24px;
+      align-items: start;
+    }
+
+    .pricing-card {
+      background: var(--black-card);
+      border: 1px solid var(--black-border);
+      border-radius: var(--radius-lg);
+      padding: 36px 32px;
+      position: relative;
+      transition: border-color 0.2s, transform 0.2s;
+    }
+    .pricing-card:hover {
+      border-color: rgba(236,72,153,0.3);
+      transform: translateY(-4px);
+    }
+    .pricing-card.featured {
+      border-color: var(--pink);
+      box-shadow: 0 0 40px var(--pink-glow);
+    }
+
+    .pricing-popular {
+      position: absolute;
+      top: -14px;
+      left: 50%;
+      transform: translateX(-50%);
+      background: var(--pink);
+      color: #fff;
+      font-size: 11px;
+      font-weight: 800;
+      letter-spacing: 1.5px;
+      text-transform: uppercase;
+      padding: 4px 16px;
+      border-radius: 20px;
+      white-space: nowrap;
+    }
+
+    .pricing-name {
+      font-size: 13px;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: 1.5px;
+      color: var(--gray);
+      margin-bottom: 8px;
+    }
+    .pricing-price {
+      margin-bottom: 8px;
+    }
+    .pricing-price-amount {
+      font-family: var(--font-display);
+      font-size: 52px;
+      color: var(--white);
+      line-height: 1;
+    }
+    .pricing-price-period {
+      font-size: 14px;
+      color: var(--gray);
+      margin-left: 4px;
+    }
+    .pricing-price-original {
+      font-size: 13px;
+      color: var(--gray);
+      text-decoration: line-through;
+      margin-bottom: 4px;
+    }
+    .pricing-desc {
+      font-size: 14px;
+      color: var(--white-soft);
+      margin-bottom: 28px;
+      line-height: 1.6;
+    }
+
+    .pricing-features { display: flex; flex-direction: column; gap: 10px; margin-bottom: 28px; }
+    .pricing-feature {
+      display: flex;
+      align-items: flex-start;
+      gap: 10px;
+      font-size: 14px;
+      color: var(--white-soft);
+    }
+    .pricing-check { color: var(--pink); font-size: 14px; margin-top: 1px; flex-shrink: 0; }
+    .pricing-check.gold { color: var(--gold); }
+    .pricing-check.dim  { color: #374151; }
+
+    /* =============================================
+       FAQ
+    ============================================= */
+    .faq-section {}
+
+    .faq-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 16px;
+      max-width: 900px;
+      margin: 0 auto;
+    }
+
+    .faq-item {
+      background: var(--black-card);
+      border: 1px solid var(--black-border);
+      border-radius: var(--radius-md);
+      overflow: hidden;
+    }
+
+    .faq-question {
+      padding: 20px 24px;
+      font-weight: 700;
+      font-size: 15px;
+      cursor: pointer;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 16px;
+      transition: color 0.2s;
+      user-select: none;
+    }
+    .faq-question:hover { color: var(--pink); }
+    .faq-icon {
+      color: var(--pink);
+      font-size: 18px;
+      flex-shrink: 0;
+      transition: transform 0.25s;
+    }
+    .faq-item.open .faq-icon { transform: rotate(45deg); }
+
+    .faq-answer {
+      padding: 0 24px;
+      max-height: 0;
+      overflow: hidden;
+      transition: max-height 0.3s ease, padding 0.3s ease;
+      font-size: 14px;
+      color: var(--white-soft);
+      line-height: 1.7;
+    }
+    .faq-item.open .faq-answer {
+      max-height: 300px;
+      padding: 0 24px 20px;
+    }
+
+    /* =============================================
+       FINAL CTA
+    ============================================= */
+    .final-cta {
+      background: linear-gradient(135deg, #1a0a12 0%, #111 50%, #0a0a1a 100%);
+      text-align: center;
+      position: relative;
+      overflow: hidden;
+    }
+    .final-cta::before {
+      content: '';
+      position: absolute;
+      top: -100px; left: 50%;
+      transform: translateX(-50%);
+      width: 600px;
+      height: 400px;
+      border-radius: 50%;
+      background: radial-gradient(circle, rgba(236,72,153,0.2) 0%, transparent 70%);
+    }
+    .final-cta-inner {
+      position: relative;
+      z-index: 1;
+      max-width: 640px;
+      margin: 0 auto;
+      padding: var(--section-pad);
+    }
+    .final-cta-title {
+      font-size: clamp(48px, 8vw, 80px);
+      margin-bottom: 20px;
+    }
+    .final-cta-sub {
+      font-size: 18px;
+      color: var(--white-soft);
+      margin-bottom: 40px;
+      line-height: 1.65;
+    }
+    .final-cta-btns {
+      display: flex;
+      gap: 16px;
+      justify-content: center;
+      flex-wrap: wrap;
+    }
+
+    /* =============================================
+       FOOTER
+    ============================================= */
+    footer {
+      background: #0d0d0d;
+      border-top: 1px solid var(--black-border);
+      padding: 48px 24px;
+    }
+    .footer-inner {
+      max-width: var(--max-w);
+      margin: 0 auto;
+      display: grid;
+      grid-template-columns: 2fr 1fr 1fr;
+      gap: 48px;
+    }
+    .footer-brand-name {
+      font-family: var(--font-display);
+      font-size: 28px;
+      color: var(--white);
+      margin-bottom: 12px;
+    }
+    .footer-brand-name span { color: var(--pink); }
+    .footer-brand-desc {
+      font-size: 13px;
+      color: var(--gray);
+      line-height: 1.65;
+      max-width: 280px;
+      margin-bottom: 20px;
+    }
+    .footer-socials {
+      display: flex;
+      gap: 12px;
+    }
+    .footer-social {
+      width: 36px; height: 36px;
+      border-radius: var(--radius-sm);
+      background: var(--black-card);
+      border: 1px solid var(--black-border);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 14px;
+      color: var(--gray);
+      transition: border-color 0.2s, color 0.2s;
+      cursor: pointer;
+    }
+    .footer-social:hover { border-color: var(--pink); color: var(--pink); }
+
+    .footer-col-title {
+      font-weight: 700;
+      font-size: 12px;
+      letter-spacing: 1.5px;
+      text-transform: uppercase;
+      color: var(--white-soft);
+      margin-bottom: 16px;
+    }
+    .footer-links { display: flex; flex-direction: column; gap: 10px; }
+    .footer-link {
+      font-size: 14px;
+      color: var(--gray);
+      transition: color 0.2s;
+      cursor: pointer;
+    }
+    .footer-link:hover { color: var(--white); }
+
+    .footer-bottom {
+      max-width: var(--max-w);
+      margin: 32px auto 0;
+      padding-top: 24px;
+      border-top: 1px solid var(--black-border);
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+    .footer-copyright { font-size: 13px; color: var(--gray); }
+
+    /* =============================================
+       EMAIL CAPTURE
+    ============================================= */
+    .email-form {
+      display: flex;
+      gap: 10px;
+      flex-wrap: wrap;
+    }
+    .email-input {
+      flex: 1;
+      min-width: 220px;
+      background: var(--black-card);
+      border: 1px solid var(--black-border);
+      border-radius: var(--radius-sm);
+      padding: 14px 18px;
+      font-family: var(--font-body);
+      font-size: 15px;
+      color: var(--white);
+      outline: none;
+      transition: border-color 0.2s;
+    }
+    .email-input::placeholder { color: var(--gray); }
+    .email-input:focus { border-color: var(--pink); }
+
+    .waitlist-section {
+      background: var(--black-soft);
+      border-top: 1px solid var(--black-border);
+      border-bottom: 1px solid var(--black-border);
+      padding: 64px 24px;
+    }
+    .waitlist-inner {
+      max-width: 600px;
+      margin: 0 auto;
+      text-align: center;
+    }
+    .waitlist-inner .section-sub { margin: 0 auto 32px; }
+
+    /* =============================================
+       ANIMATIONS
+    ============================================= */
+    @keyframes fadeUp {
+      from { opacity: 0; transform: translateY(24px); }
+      to   { opacity: 1; transform: translateY(0); }
+    }
+    .fade-up { animation: fadeUp 0.6s ease both; }
+    .delay-1 { animation-delay: 0.1s; }
+    .delay-2 { animation-delay: 0.2s; }
+    .delay-3 { animation-delay: 0.3s; }
+    .delay-4 { animation-delay: 0.4s; }
+
+    /* =============================================
+       RESPONSIVE
+    ============================================= */
+    @media (max-width: 900px) {
+      .nav-links { display: none; }
+      .nav-hamburger { display: flex; }
+
+      .hero-inner { grid-template-columns: 1fr; gap: 48px; }
+      .hero-visual { order: -1; max-width: 420px; margin: 0 auto; width: 100%; }
+      .hero-title { font-size: 64px; }
+
+      .inside-grid  { grid-template-columns: 1fr; }
+      .inside-visual { position: static; }
+      .app-grid     { grid-template-columns: 1fr; }
+      .pricing-grid { grid-template-columns: 1fr; max-width: 420px; margin: 0 auto; }
+      .faq-grid     { grid-template-columns: 1fr; }
+      .footer-inner { grid-template-columns: 1fr; gap: 32px; }
+    }
+
+    @media (max-width: 600px) {
+      :root { --section-pad: 64px 20px; }
+      .hero { padding: 100px 20px 64px; }
+      .hero-title { font-size: 52px; }
+      .hero-stats { gap: 20px; }
+      .hero-ctas { flex-direction: column; }
+      .hero-ctas .btn { width: 100%; justify-content: center; }
+      .archetypes-grid { grid-template-columns: 1fr 1fr; }
+    }
+  </style>
+</head>
+
+<body>
+
+  <!-- =========================================
+       NAV
+  ========================================= -->
+  <nav id="nav">
+    <div class="nav-inner">
+      <a href="#" class="nav-logo">PACK<span>READY</span></a>
+      <ul class="nav-links">
+        <li><a href="#guide">The Guide</a></li>
+        <li><a href="#app">The App</a></li>
+        <li><a href="quiz.html" style="color:var(--gold);">Take the Quiz</a></li>
+        <li><a href="#pricing">Pricing</a></li>
+        <li><a href="#faq">FAQ</a></li>
+      </ul>
+      <div class="nav-cta">
+        <a href="#pricing" class="btn btn-primary" style="padding:10px 20px;font-size:14px;">Get the Guide</a>
+      </div>
+      <div class="nav-hamburger" onclick="toggleMobileMenu()" aria-label="Menu">
+        <span></span><span></span><span></span>
+      </div>
+    </div>
+  </nav>
+
+  <!-- =========================================
+       HERO
+  ========================================= -->
+  <section class="hero" id="home">
+    <div class="hero-inner container">
+      <div class="hero-content">
+        <div class="hero-eyebrow fade-up">
+          <span class="tag tag-pink">New Skater? Start Here.</span>
+        </div>
+
+        <h1 class="hero-title display fade-up delay-1">
+          GET<br>
+          <span class="line-pink">PACK</span><br>
+          <span class="line-gold">READY.</span>
+        </h1>
+
+        <p class="hero-sub fade-up delay-2">
+          The complete beginner's guide for new roller derby skaters. Every skill, every rule, and every gear decision you need: from your first practice to the skills test. Written by skaters. Built for real life.
+        </p>
+
+        <div class="hero-ctas fade-up delay-3">
+          <a href="#pricing" class="btn btn-primary btn-large">
+            Get the Guide · $34.99
+          </a>
+          <a href="#waitlist" class="btn btn-outline btn-large">
+            Join the App Waitlist
+          </a>
+        </div>
+
+        <div class="hero-stats fade-up delay-4">
+          <div>
+            <div class="hero-stat-num">99</div>
+            <div class="hero-stat-label">Pages of content</div>
+          </div>
+          <div>
+            <div class="hero-stat-num">33</div>
+            <div class="hero-stat-label">Skills test skills covered</div>
+          </div>
+          <div>
+            <div class="hero-stat-num">4</div>
+            <div class="hero-stat-label">Printable appendices</div>
+          </div>
+        </div>
+      </div>
+
+      <div class="hero-visual fade-up delay-2">
+        <div class="hero-card-main">
+          <div class="float-badge">Available Now</div>
+
+          <div class="guide-cover-preview">
+            <div class="guide-cover-stars">★  ★  ★</div>
+            <div class="guide-cover-title">PACK READY</div>
+            <div class="guide-cover-sub">The Complete Roller Derby Starter Guide</div>
+            <div class="guide-cover-divider">◆  ◆  ◆</div>
+            <div class="guide-cover-topics">Gear &nbsp;·&nbsp; Skills &nbsp;·&nbsp; Rules &nbsp;·&nbsp; Culture &nbsp;·&nbsp; Skills Test</div>
+          </div>
+
+          <div class="hero-card-meta">
+            <div>
+              <div class="hero-card-pages">99 pages &nbsp;·&nbsp; Instant PDF download</div>
+              <div class="hero-card-price-note" style="margin-top:4px;color:#6b7280;font-size:12px;">Printable &amp; mobile-optimized</div>
+            </div>
+            <div class="hero-card-price">$34.99</div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- =========================================
+       TICKER
+  ========================================= -->
+  <div class="ticker" aria-hidden="true">
+    <div class="ticker-inner">
+      <span class="ticker-item">MINIMUM SKILLS BREAKDOWN</span>
+      <span class="ticker-item ticker-dot">★</span>
+      <span class="ticker-item">GEAR BUYING GUIDE</span>
+      <span class="ticker-item ticker-dot">★</span>
+      <span class="ticker-item">27-IN-5 TRAINING PLAN</span>
+      <span class="ticker-item ticker-dot">★</span>
+      <span class="ticker-item">DERBY RULES EXPLAINED</span>
+      <span class="ticker-item ticker-dot">★</span>
+      <span class="ticker-item">FRESH MEAT SURVIVAL GUIDE</span>
+      <span class="ticker-item ticker-dot">★</span>
+      <span class="ticker-item">OFF-SKATES CONDITIONING</span>
+      <span class="ticker-item ticker-dot">★</span>
+      <span class="ticker-item">PRINTABLE SKILL TRACKER</span>
+      <span class="ticker-item ticker-dot">★</span>
+      <span class="ticker-item">DERBY GLOSSARY A-Z</span>
+      <span class="ticker-item ticker-dot">★</span>
+      <!-- Duplicate for seamless loop -->
+      <span class="ticker-item">MINIMUM SKILLS BREAKDOWN</span>
+      <span class="ticker-item ticker-dot">★</span>
+      <span class="ticker-item">GEAR BUYING GUIDE</span>
+      <span class="ticker-item ticker-dot">★</span>
+      <span class="ticker-item">27-IN-5 TRAINING PLAN</span>
+      <span class="ticker-item ticker-dot">★</span>
+      <span class="ticker-item">DERBY RULES EXPLAINED</span>
+      <span class="ticker-item ticker-dot">★</span>
+      <span class="ticker-item">FRESH MEAT SURVIVAL GUIDE</span>
+      <span class="ticker-item ticker-dot">★</span>
+      <span class="ticker-item">OFF-SKATES CONDITIONING</span>
+      <span class="ticker-item ticker-dot">★</span>
+      <span class="ticker-item">PRINTABLE SKILL TRACKER</span>
+      <span class="ticker-item ticker-dot">★</span>
+      <span class="ticker-item">DERBY GLOSSARY A-Z</span>
+      <span class="ticker-item ticker-dot">★</span>
+    </div>
+  </div>
+
+  <!-- =========================================
+       INSIDE THE GUIDE
+  ========================================= -->
+  <section class="inside-section" id="guide">
+    <div class="container">
+      <div class="inside-grid">
+        <div>
+          <div class="section-header">
+            <div class="section-eyebrow">
+              <span class="tag tag-pink">The Guide</span>
+            </div>
+            <h2 class="section-title display">99 pages.<br><span class="text-pink">Nothing missing.</span></h2>
+            <p class="section-sub">Every question a new derby skater has, answered in plain language with real specifics. No fluff, no filler.</p>
+          </div>
+
+          <div class="inside-chapters">
+            <div class="chapter-row">
+              <div class="chapter-num">1</div>
+              <div>
+                <div class="chapter-title">Welcome to the Pack</div>
+                <div class="chapter-desc">Why derby, the skater mindset, and who this guide is for</div>
+              </div>
+            </div>
+            <div class="chapter-row">
+              <div class="chapter-num">2</div>
+              <div>
+                <div class="chapter-title">Gearing Up</div>
+                <div class="chapter-desc">Required gear, skate selection, budget tiers, and fitting guides</div>
+              </div>
+            </div>
+            <div class="chapter-row">
+              <div class="chapter-num">3</div>
+              <div>
+                <div class="chapter-title">Finding Your League</div>
+                <div class="chapter-desc">How to find a league, what to look for, first practice prep</div>
+              </div>
+            </div>
+            <div class="chapter-row">
+              <div class="chapter-num">4</div>
+              <div>
+                <div class="chapter-title">Learning to Skate</div>
+                <div class="chapter-desc">Week by week guide to stance, stops, falls, crossovers, and transitions.</div>
+              </div>
+            </div>
+            <div class="chapter-row">
+              <div class="chapter-num">5</div>
+              <div>
+                <div class="chapter-title">Understanding the Game</div>
+                <div class="chapter-desc">Rules, positions, scoring, penalties, and strategy</div>
+              </div>
+            </div>
+            <div class="chapter-row">
+              <div class="chapter-num">6</div>
+              <div>
+                <div class="chapter-title">The Minimum Skills Test</div>
+                <div class="chapter-desc">Every skill rated by difficulty, with drills and test-day tips</div>
+              </div>
+            </div>
+            <div class="chapter-row">
+              <div class="chapter-num">7</div>
+              <div>
+                <div class="chapter-title">Training Smart</div>
+                <div class="chapter-desc">Off-skates conditioning, injury prevention, 12-week plan</div>
+              </div>
+            </div>
+            <div class="chapter-row">
+              <div class="chapter-num">8</div>
+              <div>
+                <div class="chapter-title">Derby Culture</div>
+                <div class="chapter-desc">History, inclusivity, derby names, and the emotional arc</div>
+              </div>
+            </div>
+            <div class="chapter-row">
+              <div class="chapter-num">9</div>
+              <div>
+                <div class="chapter-title">Your Derby Journey</div>
+                <div class="chapter-desc">What comes next, milestone setting, and a closing note</div>
+              </div>
+            </div>
+            <div class="chapter-row" style="border-color:rgba(234,179,8,0.3)">
+              <div class="chapter-num" style="color:var(--gold)">+</div>
+              <div>
+                <div class="chapter-title" style="color:var(--gold)">5 Printable Appendices</div>
+                <div class="chapter-desc">Minimum skills checklist, glossary, gear guide, resources, derby name worksheet</div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div class="inside-visual">
+          <div class="guide-mockup">
+            <div class="guide-mockup-header">
+              <div class="mock-dot" style="background:#ec4899"></div>
+              <div class="mock-dot" style="background:#eab308"></div>
+              <div class="mock-dot" style="background:#374151"></div>
+              <span style="font-size:12px;color:#6b7280;margin-left:8px;">Pack Ready Guide · Section 6</span>
+            </div>
+
+            <div class="guide-page-preview">
+              <div class="preview-section-label">Section 6 · Minimum Skills</div>
+              <div class="preview-section-heading">The Plow Stop</div>
+              <div class="skill-star-row">
+                <span class="skill-star-label">Difficulty</span>
+                <span class="skill-stars">★★★☆☆</span>
+              </div>
+              <div class="preview-body-lines" style="margin-top:12px;">
+                <div class="preview-line full"></div>
+                <div class="preview-line mid"></div>
+                <div class="preview-line full"></div>
+                <div class="preview-line short"></div>
+              </div>
+            </div>
+
+            <div class="guide-stats-row">
+              <div class="guide-stat">
+                <div class="guide-stat-num">33</div>
+                <div class="guide-stat-label">Min. Skills</div>
+              </div>
+              <div class="guide-stat">
+                <div class="guide-stat-num">35+</div>
+                <div class="guide-stat-label">Glossary terms</div>
+              </div>
+              <div class="guide-stat">
+                <div class="guide-stat-num">12</div>
+                <div class="guide-stat-label">Week plan</div>
+              </div>
+            </div>
+
+            <div style="margin-top:16px;padding:16px;background:#0d0d0d;border-radius:8px;border:1px solid #2a2a2a;">
+              <div style="font-size:10px;color:#ec4899;letter-spacing:1.5px;text-transform:uppercase;margin-bottom:8px;">Pro Tip</div>
+              <div style="font-size:12px;color:#9ca3af;line-height:1.6;">Practice your plow stop off-skates first. Stand pigeon-toed, push knees outward against resistance. Your inner thighs are doing more work than you think.</div>
+            </div>
+          </div>
+
+          <div style="margin-top:16px;display:flex;gap:10px;">
+            <a href="#pricing" class="btn btn-primary" style="flex:1;justify-content:center;">Get the Guide</a>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- =========================================
+       APP SECTION
+  ========================================= -->
+  <section class="app-section" id="app">
+    <div class="container">
+      <div class="app-grid">
+        <div class="app-mockup">
+          <div class="app-mock-header">
+            <div>
+              <div class="app-mock-greeting">Welcome back,</div>
+              <div class="app-mock-name">Crash Bandicoot</div>
+            </div>
+            <div class="app-mock-level">LEVEL 3 · BLOCKER</div>
+          </div>
+
+          <div class="app-mock-progress">
+            <div class="app-mock-progress-label">
+              <span>Skills Test Readiness</span>
+              <span>62%</span>
+            </div>
+            <div class="progress-bar">
+              <div class="progress-fill" style="width:62%"></div>
+            </div>
+          </div>
+
+          <div class="app-mock-skills">
+            <div class="skill-row">
+              <div class="skill-row-left">
+                <div class="skill-status passed"></div>
+                <span class="skill-name">Plow Stop</span>
+              </div>
+              <span class="skill-conf">★★★★★</span>
+            </div>
+            <div class="skill-row">
+              <div class="skill-row-left">
+                <div class="skill-status passed"></div>
+                <span class="skill-name">T-Stop</span>
+              </div>
+              <span class="skill-conf">★★★★☆</span>
+            </div>
+            <div class="skill-row">
+              <div class="skill-row-left">
+                <div class="skill-status progress"></div>
+                <span class="skill-name">180° Transition</span>
+              </div>
+              <span class="skill-conf">★★☆☆☆</span>
+            </div>
+            <div class="skill-row">
+              <div class="skill-row-left">
+                <div class="skill-status progress"></div>
+                <span class="skill-name">27-in-5 Endurance</span>
+              </div>
+              <span class="skill-conf">★★★☆☆</span>
+            </div>
+            <div class="skill-row">
+              <div class="skill-row-left">
+                <div class="skill-status not-started"></div>
+                <span class="skill-name">360° Transition</span>
+              </div>
+              <span class="skill-conf text-muted" style="font-size:11px;">Not started</span>
+            </div>
+          </div>
+
+          <div class="app-mock-badges">
+            <div class="badge-chip earned">🏅<div class="badge-chip-label">First Fall</div></div>
+            <div class="badge-chip earned">⚡<div class="badge-chip-label">27 Club</div></div>
+            <div class="badge-chip earned">🎯<div class="badge-chip-label">Stop Squad</div></div>
+            <div class="badge-chip">🔒<div class="badge-chip-label">Locked</div></div>
+          </div>
+        </div>
+
+        <div>
+          <div class="section-header">
+            <div class="section-eyebrow">
+              <span class="tag tag-gold">Coming Soon</span>
+            </div>
+            <h2 class="section-title display">Track it.<br><span class="text-gold">Know it.</span></h2>
+            <p class="section-sub">The Pack Ready app makes your Minimum Skills journey visible. "I think I'm getting better" isn't the same as knowing. This is how you know.</p>
+          </div>
+
+          <div class="app-features">
+            <div class="app-feature">
+              <div class="app-feature-icon">📋</div>
+              <div>
+                <div class="app-feature-title">Minimum Skills Tracker</div>
+                <div class="app-feature-desc">All 33 skills in one place. Mark progress, rate confidence, leave notes. Tracks both sides of asymmetric skills.</div>
+              </div>
+            </div>
+            <div class="app-feature">
+              <div class="app-feature-icon">⚡</div>
+              <div>
+                <div class="app-feature-title">Gamified Progress</div>
+                <div class="app-feature-desc">Earn XP, unlock badges, hit streak goals, and level up from Freshie to Jammer. Long training blocks are easier when you can see where you started.</div>
+              </div>
+            </div>
+            <div class="app-feature">
+              <div class="app-feature-icon">📅</div>
+              <div>
+                <div class="app-feature-title">Practice Log</div>
+                <div class="app-feature-desc">Log every session, tag the skills you worked on, and watch your training history build over time.</div>
+              </div>
+            </div>
+            <div class="app-feature">
+              <div class="app-feature-icon">📚</div>
+              <div>
+                <div class="app-feature-title">Learn Section</div>
+                <div class="app-feature-desc">Rules quizzes, skill lessons, the full derby glossary, and coaching tips from experienced skaters.</div>
+              </div>
+            </div>
+          </div>
+
+          <div style="margin-top:32px;">
+            <a href="#waitlist" class="btn btn-gold btn-large">Join the Waitlist (It's Free)</a>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- =========================================
+       QUIZ SECTION
+  ========================================= -->
+  <section style="background: linear-gradient(135deg, #160a10 0%, #111 50%, #0a0d1a 100%); padding: var(--section-pad); position:relative; overflow:hidden;">
+    <div style="position:absolute;top:-100px;right:-100px;width:500px;height:500px;border-radius:50%;background:radial-gradient(circle, rgba(234,179,8,0.1) 0%, transparent 65%);pointer-events:none;"></div>
+    <div class="container" style="display:grid;grid-template-columns:1fr 1fr;gap:64px;align-items:center;">
+
+      <!-- Left: copy -->
+      <div>
+        <div class="section-eyebrow">
+          <span class="tag tag-gold">Free Rules Quiz</span>
+        </div>
+        <h2 class="section-title display" style="margin-bottom:20px;">
+          How well do you<br>know the <span class="text-gold">game?</span>
+        </h2>
+        <p style="font-size:18px;color:var(--white-soft);line-height:1.65;margin-bottom:32px;max-width:420px;">
+          15 scenario-based questions across three categories. Find out where your rules knowledge is solid and where to study before you hit the track.
+        </p>
+        <div style="display:flex;flex-direction:column;gap:14px;margin-bottom:36px;">
+          <div style="display:flex;align-items:center;gap:12px;font-size:14px;color:var(--white-soft);">
+            <span style="color:var(--pink);font-size:16px;">★</span> Fresh Meat Basics: gear, penalties, re-entry rules
+          </div>
+          <div style="display:flex;align-items:center;gap:12px;font-size:14px;color:var(--white-soft);">
+            <span style="color:var(--gold);font-size:16px;">★</span> Pack Awareness: No Pack, Out of Play, engagement zone
+          </div>
+          <div style="display:flex;align-items:center;gap:12px;font-size:14px;color:var(--white-soft);">
+            <span style="color:#22c55e;font-size:16px;">★</span> Jammer Strategy: scoring, Lead Jammer, Star Pass
+          </div>
+          <div style="display:flex;align-items:center;gap:12px;font-size:14px;color:var(--white-soft);">
+            <span style="color:var(--white-soft);font-size:16px;">★</span> Plain-language feedback on every wrong answer
+          </div>
+        </div>
+        <a href="quiz.html" class="btn btn-gold btn-large">Take the Bout Simulator →</a>
+      </div>
+
+      <!-- Right: category preview cards -->
+      <div style="display:flex;flex-direction:column;gap:14px;">
+        <div style="background:var(--black-card);border:1px solid var(--black-border);border-radius:var(--radius-md);padding:22px;border-left:4px solid var(--pink);display:flex;align-items:center;justify-content:space-between;gap:16px;">
+          <div>
+            <div style="font-size:10px;color:var(--pink);font-weight:700;letter-spacing:1.5px;text-transform:uppercase;margin-bottom:6px;">Category 1</div>
+            <div style="font-family:var(--font-display);font-size:20px;color:var(--white);line-height:1;margin-bottom:4px;">FRESH MEAT BASICS</div>
+            <div style="font-size:12px;color:var(--gray);">5 questions · gear, penalties, track re-entry</div>
+          </div>
+          <div style="font-size:28px;flex-shrink:0;">🛼</div>
+        </div>
+        <div style="background:var(--black-card);border:1px solid var(--black-border);border-radius:var(--radius-md);padding:22px;border-left:4px solid var(--gold);display:flex;align-items:center;justify-content:space-between;gap:16px;">
+          <div>
+            <div style="font-size:10px;color:var(--gold);font-weight:700;letter-spacing:1.5px;text-transform:uppercase;margin-bottom:6px;">Category 2</div>
+            <div style="font-family:var(--font-display);font-size:20px;color:var(--white);line-height:1;margin-bottom:4px;">PACK AWARENESS</div>
+            <div style="font-size:12px;color:var(--gray);">5 questions · No Pack, Out of Play, engagement zone</div>
+          </div>
+          <div style="font-size:28px;flex-shrink:0;">📍</div>
+        </div>
+        <div style="background:var(--black-card);border:1px solid var(--black-border);border-radius:var(--radius-md);padding:22px;border-left:4px solid #22c55e;display:flex;align-items:center;justify-content:space-between;gap:16px;">
+          <div>
+            <div style="font-size:10px;color:#22c55e;font-weight:700;letter-spacing:1.5px;text-transform:uppercase;margin-bottom:6px;">Category 3</div>
+            <div style="font-family:var(--font-display);font-size:20px;color:var(--white);line-height:1;margin-bottom:4px;">JAMMER STRATEGY</div>
+            <div style="font-size:12px;color:var(--gray);">5 questions · Lead Jammer, Star Pass, Power Jam</div>
+          </div>
+          <div style="font-size:28px;flex-shrink:0;">⭐</div>
+        </div>
+        <div style="text-align:center;margin-top:4px;">
+          <a href="quiz.html" style="font-size:13px;color:var(--gray);transition:color 0.2s;" onmouseover="this.style.color='#F9FAFB'" onmouseout="this.style.color='#6b7280'">See your category scores and study targets →</a>
+        </div>
+      </div>
+
+    </div>
+  </section>
+
+  <!-- =========================================
+       DERBY NAME GENERATOR
+  ========================================= -->
+  <section id="name-generator" style="background:#111;padding:var(--section-pad);position:relative;overflow:hidden;">
+    <div style="position:absolute;top:-80px;left:-80px;width:400px;height:400px;border-radius:50%;background:radial-gradient(circle,rgba(236,72,153,0.08) 0%,transparent 65%);pointer-events:none;"></div>
+    <div class="container" style="max-width:800px;">
+      <div class="section-header-center">
+        <div class="section-eyebrow" style="justify-content:center;">
+          <span class="tag tag-pink">Free Tool</span>
+        </div>
+        <h2 class="section-title display" style="text-align:center;">Find your <span class="text-pink">derby name.</span></h2>
+        <p style="text-align:center;color:var(--gray);font-size:17px;max-width:520px;margin:0 auto 48px;">Four questions. Five name ideas. Built around who you actually are, not just what sounds aggressive.</p>
+      </div>
+
+      <!-- Progress dots -->
+      <div id="ng-container" style="background:var(--black-card);border:1px solid rgba(236,72,153,0.2);border-radius:var(--radius-lg);padding:40px;">
+
+        <div id="ng-progress-bar" style="display:flex;gap:6px;margin-bottom:32px;">
+          <div class="ng-dot ng-dot-active" id="ngdot-1"></div>
+          <div class="ng-dot" id="ngdot-2"></div>
+          <div class="ng-dot" id="ngdot-3"></div>
+          <div class="ng-dot" id="ngdot-4"></div>
+        </div>
+
+        <!-- Step 1: Name input -->
+        <div id="ng-step-1">
+          <div class="ng-label">Step 1 of 4</div>
+          <p class="ng-question">What's your first name?</p>
+          <p style="font-size:14px;color:var(--gray);margin-bottom:20px;">Used for phonetic matching and alliteration. Skip this if you want to start from scratch.</p>
+          <input id="ng-name-input" type="text" placeholder="e.g. Sarah, Maya, Priya..."
+            style="width:100%;background:rgba(255,255,255,0.05);border:1px solid rgba(255,255,255,0.15);border-radius:8px;padding:14px 18px;color:var(--white);font-family:var(--font-body);font-size:16px;outline:none;margin-bottom:20px;transition:border-color 0.2s;"
+            oninput="this.style.borderColor='rgba(236,72,153,0.5)'"
+          />
+          <div style="display:flex;gap:10px;">
+            <button onclick="ngNext(1)" class="btn btn-primary" style="flex:1;justify-content:center;">Next →</button>
+            <button onclick="ngSkipName()" class="btn" style="background:rgba(255,255,255,0.06);border:1px solid rgba(255,255,255,0.1);color:var(--gray);padding:14px 20px;">Skip</button>
+          </div>
+        </div>
+
+        <!-- Step 2: Interests (multi-select chips) -->
+        <div id="ng-step-2" style="display:none;">
+          <div class="ng-label">Step 2 of 4</div>
+          <p class="ng-question">What are you into outside of derby?</p>
+          <p style="font-size:14px;color:var(--gray);margin-bottom:20px;">Pick at least one. The more you choose, the wilder the combinations.</p>
+          <div id="ng-interest-grid" style="display:grid;grid-template-columns:repeat(3,1fr);gap:8px;margin-bottom:16px;"></div>
+          <p id="ng-interest-err" style="display:none;color:var(--pink);font-size:13px;margin-bottom:12px;">Pick at least one to continue.</p>
+          <div style="display:flex;gap:10px;margin-top:8px;">
+            <button onclick="ngBack(2)" class="btn" style="background:rgba(255,255,255,0.06);border:1px solid rgba(255,255,255,0.1);color:var(--gray);padding:14px 20px;">← Back</button>
+            <button onclick="ngNext(2)" class="btn btn-primary" style="flex:1;justify-content:center;">Next →</button>
+          </div>
+        </div>
+
+        <!-- Step 3: Persona -->
+        <div id="ng-step-3" style="display:none;">
+          <div class="ng-label">Step 3 of 4</div>
+          <p class="ng-question">On the track, you want to be known as...</p>
+          <div style="display:grid;grid-template-columns:1fr 1fr;gap:12px;margin-bottom:24px;" id="ng-persona-grid">
+            <button class="name-choice-btn" data-val="power" onclick="ngSelectPersona(this,'power')">
+              <span style="font-size:22px;display:block;margin-bottom:6px;">💥</span>
+              <strong style="display:block;margin-bottom:4px;">The Bruiser</strong>
+              <span style="font-size:12px;color:var(--gray);">Hit hard. Hold your ground.</span>
+            </button>
+            <button class="name-choice-btn" data-val="speed" onclick="ngSelectPersona(this,'speed')">
+              <span style="font-size:22px;display:block;margin-bottom:6px;">⚡</span>
+              <strong style="display:block;margin-bottom:4px;">The Ghost</strong>
+              <span style="font-size:12px;color:var(--gray);">Slip through gaps they don't see.</span>
+            </button>
+            <button class="name-choice-btn" data-val="strategy" onclick="ngSelectPersona(this,'strategy')">
+              <span style="font-size:22px;display:block;margin-bottom:6px;">♟️</span>
+              <strong style="display:block;margin-bottom:4px;">The Strategist</strong>
+              <span style="font-size:12px;color:var(--gray);">Control the pack. Read the game.</span>
+            </button>
+            <button class="name-choice-btn" data-val="chaos" onclick="ngSelectPersona(this,'chaos')">
+              <span style="font-size:22px;display:block;margin-bottom:6px;">🔥</span>
+              <strong style="display:block;margin-bottom:4px;">The Wild Card</strong>
+              <span style="font-size:12px;color:var(--gray);">Unpredictable. Unstoppable. You.</span>
+            </button>
+          </div>
+          <button onclick="ngBack(3)" class="btn" style="background:rgba(255,255,255,0.06);border:1px solid rgba(255,255,255,0.1);color:var(--gray);padding:14px 20px;">← Back</button>
+        </div>
+
+        <!-- Step 4: Naming formula -->
+        <div id="ng-step-4" style="display:none;">
+          <div class="ng-label">Step 4 of 4</div>
+          <p class="ng-question">How do you want your name to hit?</p>
+          <div style="display:flex;flex-direction:column;gap:10px;margin-bottom:24px;" id="ng-formula-grid">
+            <button class="name-choice-btn" data-val="punisher" onclick="ngSelectFormula(this,'punisher')" style="text-align:left;">
+              <strong style="color:var(--pink);">The Punisher</strong>
+              <span style="display:block;font-size:13px;color:var(--gray);margin-top:4px;">Raw power. Intimidating sounds, no mercy. E.g., Iron Wraith, Titan Crush.</span>
+            </button>
+            <button class="name-choice-btn" data-val="wordplay" onclick="ngSelectFormula(this,'wordplay')" style="text-align:left;">
+              <strong style="color:var(--pink);">The Wordplay</strong>
+              <span style="display:block;font-size:13px;color:var(--gray);margin-top:4px;">Clever puns and phonetic tricks. They'll laugh, then realize you're serious. E.g., Goregeous, Batter Ram.</span>
+            </button>
+            <button class="name-choice-btn" data-val="classic" onclick="ngSelectFormula(this,'classic')" style="text-align:left;">
+              <strong style="color:var(--pink);">The Classic</strong>
+              <span style="display:block;font-size:13px;color:var(--gray);margin-top:4px;">Traditional derby feel. Your real name echoed or alliterated. E.g., Sarah the Savage, K-Wreck.</span>
+            </button>
+            <button class="name-choice-btn" data-val="double" onclick="ngSelectFormula(this,'double')" style="text-align:left;">
+              <strong style="color:var(--pink);">The Double Threat</strong>
+              <span style="display:block;font-size:13px;color:var(--gray);margin-top:4px;">Two contradictory things fused together. The contrast is the point. E.g., Celestial Riot, Gentle Catastrophe.</span>
+            </button>
+          </div>
+          <button onclick="ngBack(4)" class="btn" style="background:rgba(255,255,255,0.06);border:1px solid rgba(255,255,255,0.1);color:var(--gray);padding:14px 20px;">← Back</button>
+        </div>
+
+        <!-- Results -->
+        <div id="ng-results" style="display:none;">
+          <div style="font-size:11px;color:var(--gold);font-weight:700;letter-spacing:2px;text-transform:uppercase;margin-bottom:8px;">Your Derby Name Ideas</div>
+          <p id="ng-results-sub" style="font-size:14px;color:var(--gray);margin-bottom:24px;">Twist them. Combine them. Make one yours.</p>
+          <div id="ng-name-cards" style="display:flex;flex-direction:column;gap:12px;margin-bottom:20px;"></div>
+
+          <!-- Name uniqueness warning -->
+          <div style="background:rgba(234,179,8,0.08);border:1px solid rgba(234,179,8,0.25);border-radius:8px;padding:14px 16px;margin-bottom:12px;display:flex;align-items:flex-start;gap:10px;">
+            <span style="flex-shrink:0;font-size:15px;">⚠️</span>
+            <p style="font-size:13px;color:var(--gold-light);line-height:1.5;margin:0;">Before you commit, check your local league's team rosters for similar names and numbers. Derby culture takes name uniqueness seriously. You don't want to show up to your first bout as the second "Riot Wren" in the building.</p>
+          </div>
+
+          <!-- Track nickname callout -->
+          <div style="background:rgba(236,72,153,0.07);border:1px solid rgba(236,72,153,0.25);border-radius:8px;padding:16px 18px;margin-bottom:24px;">
+            <div style="font-size:10px;color:var(--pink);font-weight:700;letter-spacing:2px;text-transform:uppercase;margin-bottom:8px;">💡 Don't forget your track name</div>
+            <p style="font-size:13px;color:var(--white-soft);line-height:1.6;margin:0;">Your teammates need something short to yell mid-jam. Think about what your name shortens to on the track. That's your <strong style="color:var(--white);">track name</strong>. "Slamantha Fox" becomes <em style="color:var(--pink);">Slam</em>. "Phantom Protocol" becomes <em style="color:var(--pink);">Phantom</em>. "Bruise Springsteen" becomes <em style="color:var(--pink);">Bruise</em> or <em style="color:var(--pink);">Springs</em>. Pick a name that works at full volume when someone needs to call you into the pack in under a second.</p>
+          </div>
+
+          <div style="display:flex;gap:10px;flex-wrap:wrap;">
+            <button onclick="ngRegenerate()" class="btn btn-outline" style="flex:1;min-width:140px;justify-content:center;">Generate Again</button>
+            <button onclick="ngReset()" class="btn" style="flex:1;min-width:140px;justify-content:center;background:rgba(236,72,153,0.1);border:1px solid rgba(236,72,153,0.3);color:var(--pink);">Start Over</button>
+          </div>
+        </div>
+
+      </div>
+
+      <p style="text-align:center;margin-top:20px;font-size:13px;color:var(--gray);">Appendix E of the Pack Ready guide is a full derby name worksheet: formulas, number pairing ideas, and a step-by-step naming system. <a href="#pricing" style="color:var(--pink);">Get the guide →</a></p>
+    </div>
+  </section>
+
+  <style>
+    .ng-label { font-size:11px;color:var(--pink);font-weight:700;letter-spacing:2px;text-transform:uppercase;margin-bottom:14px; }
+    .ng-question { font-size:20px;color:var(--white);font-weight:600;margin-bottom:14px;line-height:1.4; }
+    .ng-dot { height:4px;flex:1;border-radius:2px;background:rgba(255,255,255,0.1);transition:background 0.3s; }
+    .ng-dot-active { background:var(--pink); }
+    .ng-dot-done { background:rgba(236,72,153,0.4); }
+    .ng-chip {
+      background:rgba(255,255,255,0.04);border:1px solid rgba(255,255,255,0.1);
+      border-radius:8px;padding:10px 10px;color:var(--white-soft);cursor:pointer;
+      font-family:var(--font-body);font-size:12px;font-weight:500;text-align:center;
+      transition:all 0.2s;display:flex;flex-direction:column;align-items:center;gap:4px;line-height:1.3;
+    }
+    .ng-chip:hover { border-color:rgba(236,72,153,0.4);background:rgba(236,72,153,0.06); }
+    .ng-chip.ng-chip-sel { border-color:var(--pink);background:rgba(236,72,153,0.14);color:var(--white); }
+    .name-choice-btn {
+      background:rgba(255,255,255,0.03);border:1px solid rgba(255,255,255,0.1);
+      border-radius:10px;padding:18px 14px;color:var(--white);cursor:pointer;
+      text-align:left;transition:all 0.2s;font-family:var(--font-body);font-size:14px;
+    }
+    .name-choice-btn:hover { border-color:rgba(236,72,153,0.4);background:rgba(236,72,153,0.06); }
+    .name-choice-btn.selected { border-color:var(--pink);background:rgba(236,72,153,0.12); }
+    @media(max-width:500px){ #ng-interest-grid{ grid-template-columns:repeat(2,1fr)!important; } }
+  </style>
+
+  <script>
+    // =============================================
+    // DERBY NAME GENERATOR v2 — Personalized Engine
+    // =============================================
+    var ngState = { step:1, firstName:'', interests:[], persona:null, formula:null };
+
+    // Interest word banks
+    var NG_INTERESTS = [
+      { key:'horror',    emoji:'🩸', label:'Horror & Gothic',
+        nouns:['Wraith','Specter','Hex','Dread','Reaper','Crypt','Venom','Fiend'],
+        adjs:['Cursed','Wicked','Savage','Grim','Hollow','Sinister','Deadly'],
+        actions:['Haunt','Hex','Slash','Devour','Stalk','Shred'],
+        nums:['13','666','31','88','1408'],
+        puns:[{name:'Goregeous',num:'#13',why:'gore + gorgeous — beauty and brutality in one hit'},
+              {name:'Dead Ringer',num:'#1',why:'a perfect double who looks like death warmed up'},
+              {name:'Slay-Her',num:'#88',why:'slay + slayer — says exactly what she does on the track'},
+              {name:'Grim Reaper',num:'#31',why:'some names just do the work — no explanation needed'},
+              {name:'Boo Ya',num:'#666',why:'ghost sound + "boo-yah" — spooky and victorious'}] },
+      { key:'scifi',     emoji:'🚀', label:'Sci-Fi & Tech',
+        nouns:['Nexus','Vector','Circuit','Ion','Quark','Matrix','Flux','Pulse'],
+        adjs:['Atomic','Plasma','Digital','Quantum','Binary','Static','Neural'],
+        actions:['Override','Surge','Crash','Overload','Disrupt'],
+        nums:['404','42','2001','64','7734','0'],
+        puns:[{name:'Error 404',num:'#404',why:'not found — because you literally cannot catch her'},
+              {name:'Kernel Panic',num:'#502',why:'total system failure — what she causes in the pack'},
+              {name:'Hard Drive',num:'#64',why:'tech term + the exact move she runs on every jam'},
+              {name:'NULL Pointer',num:'#0',why:'points at you, registers nothing'},
+              {name:'Debug Mode',num:'#42',why:'analyzing every gap in the defense in real time'}] },
+      { key:'myth',      emoji:'⚔️', label:'Mythology & Folklore',
+        nouns:['Valkyrie','Titan','Fury','Oracle','Nemesis','Banshee','Phoenix','Fate'],
+        adjs:['Ancient','Iron','Thunder','Storm','Blood','Mythic','Forged'],
+        actions:['Strike','Forge','Clash','Reign','Conquer'],
+        nums:['9','3','7','12','100','888'],
+        puns:[{name:'Wrath of Con',num:'#9',why:'Wrath of Khan + wrath itself — the classics never die'},
+              {name:'Medusa Strikes',num:'#7',why:'turns opponents to stone on contact, literally'},
+              {name:'Joan of Arcs',num:'#1',why:'Joan of Arc + electrical arcs — martyr energy, lightning hit'},
+              {name:'Achilles Heel-y',num:'#3',why:'Achilles + roller heel — vulnerable spot, legendary name'},
+              {name:'Athena Blocks',num:'#77',why:'goddess of strategy + the literal move she lives for'}] },
+      { key:'music',     emoji:'🎸', label:'Music & Punk',
+        nouns:['Riff','Static','Feedback','Bass','Amp','Reverb','Chord'],
+        adjs:['Punk','Loud','Raw','Heavy','Distorted','Wired','Shredded'],
+        actions:['Shred','Thrash','Bash','Blast','Riff'],
+        nums:['1977','808','77','1984','7'],
+        puns:[{name:'Bruise Springsteen',num:'#85',why:'Bruce + bruise — classic rock with a body check'},
+              {name:'Heavy Medal',num:'#1',why:'heavy metal + winning medals — she gets both'},
+              {name:'Bass Ackwards',num:'#404',why:'bass + bass-ackwards — does everything her way, still wins'},
+              {name:'Pitch Slapper',num:'#7',why:'perfect pitch + literal slap — technically gifted and physical'},
+              {name:'Smash Mouth',num:'#97',why:'"Allstar" energy, but on skates and actively furious'}] },
+      { key:'gaming',    emoji:'🎮', label:'Gaming & Anime',
+        nouns:['Glitch','Pixel','Combo','Sprite','Frame','Respawn'],
+        adjs:['Legendary','Lethal','Epic','Rogue','Critical'],
+        actions:['Override','Combo','Crit','Loot','Respawn'],
+        nums:['64','360','100','42','99'],
+        puns:[{name:'One Hit Wonder',num:'#1',why:'one-shot KO + the musical irony — deadly and a little funny'},
+              {name:'Rage Quit',num:'#502',why:'she makes opponents want to walk off the track mid-jam'},
+              {name:'Final Boss',num:'#100',why:'the last thing you face — and you will lose'},
+              {name:'AFK Destroyer',num:'#360',why:'away from keyboard, somehow still dominating'},
+              {name:'Crit Hit',num:'#42',why:'critical hit — maximum damage, every time'}] },
+      { key:'nature',    emoji:'🌿', label:'Nature & Outdoors',
+        nouns:['Tempest','Frost','Storm','Thorn','Fang','Blaze','Gale','Squall'],
+        adjs:['Feral','Wild','Primal','Fierce','Raw','Untamed'],
+        actions:['Surge','Tear','Shred','Strike','Rip'],
+        nums:['11','7','33','9'],
+        puns:[{name:'Natural Disaster',num:'#9',why:"she's literally both those words at once"},
+              {name:'Hailstone Cold',num:'#33',why:'hailstone + ice cold — weather system with a grudge'},
+              {name:'Gone with the Shins',num:'#1',why:'Gone with the Wind + shin guard zone — cinematic, painful'},
+              {name:'Thorny Issue',num:'#13',why:'a problem that keeps poking — and drawing blood'}] },
+      { key:'truecrime', emoji:'🔪', label:'True Crime',
+        nouns:['Alibi','Cipher','Verdict','Motive','Witness'],
+        adjs:['Cold','Calculated','Lethal','Precise','Guilty'],
+        actions:['Strike','Evade','Intercept','Pursue'],
+        nums:['13','31','1','99'],
+        puns:[{name:'Assault and Battery',num:'#12',why:'the charge + the pack hit — she is both counts in one body'},
+              {name:'First Degree Burns',num:'#1',why:'first-degree charge + literal burn from speed'},
+              {name:'Cold Case',num:'#13',why:'unsolved, cold energy — you will not figure her out'},
+              {name:'Hit and Run',num:'#99',why:'the crime + the exact play she runs every jam'},
+              {name:'Plea Basher',num:'#31',why:'plea bargain + bash — her hits speak for the record'}] },
+      { key:'food',      emoji:'🍰', label:'Food & Baking',
+        nouns:['Whisk','Batter','Glaze','Crumble','Knead','Dough'],
+        adjs:['Rolling','Crushed','Raw','Hard','Glazed'],
+        actions:['Roll','Crush','Mash','Slice','Knead'],
+        nums:['350','12','400','7','88'],
+        puns:[{name:'Batter Ram',num:'#7',why:'battering ram + batter bowl — medieval siege meets the kitchen'},
+              {name:'On a Roll',num:'#1',why:'bread roll + unstoppable momentum — both meanings, fully earned'},
+              {name:'The Kneader',num:'#404',why:'knead dough + needer — takes what she needs on the track'},
+              {name:'Foul-Proof',num:'#88',why:'foolproof recipe + foul call — never penalized, always prepared'},
+              {name:'Fleur de Lys',num:'#350',why:'heraldry + baking flour + 350F oven temp — layered like pastry'}] },
+      { key:'animals',   emoji:'🦁', label:'Animals & Wildlife',
+        nouns:['Fang','Claw','Talon','Venom','Pack','Wolf','Lynx','Cobra','Viper'],
+        adjs:['Feral','Wild','Primal','Savage','Apex'],
+        actions:['Strike','Pounce','Stalk','Tear'],
+        nums:['7','13','11','33'],
+        puns:[{name:'Puma Fide',num:'#1',why:'puma + bona fide — legitimately predatory, cannot be questioned'},
+              {name:'Catastrophic',num:'#9',why:'cat + catastrophic — cats are chaos and she leans into it'},
+              {name:'Mane Event',num:'#33',why:'mane + main event — lion energy, always the headliner'},
+              {name:'Fang You Very Much',num:'#13',why:'fang + "thank you very much" — polite, then immediately deadly'}] },
+      { key:'history',   emoji:'🏛️', label:'History & War',
+        nouns:['Valor','Iron','Siege','Blitz','Battalion','Bastion'],
+        adjs:['Battle-Born','Iron','Steeled','Forged','War-Worn'],
+        actions:['Strike','Charge','Advance','Conquer','Siege'],
+        nums:['1944','42','1','7','451'],
+        puns:[{name:'Blitzkriegrrrl',num:'#44',why:'Blitzkrieg + riot grrrl — WWII tactics meet punk feminism'},
+              {name:'Attila the Honey',num:'#451',why:'Attila the Hun + honey — devastating, deceptively sweet'},
+              {name:'Cold Front',num:'#1',why:'military weather term + cold strategy — advancing, unstoppable'},
+              {name:'Iron Curtain Call',num:'#7',why:'Cold War reference + theatrical finale — the crowd never saw it coming'}] },
+      { key:'comedy',    emoji:'😂', label:'Comedy & Wordplay',
+        nouns:['Punchline','Roast','Setup','Callback'],
+        adjs:['Dry','Deadpan','Sharp','Punny'],
+        actions:['Land','Roast','Drop','Deliver'],
+        nums:['42','7','11','99'],
+        puns:[{name:'Pun Intended',num:'#1',why:'fully intentional — she knows exactly what she is doing'},
+              {name:'Commit to the Bit',num:'#99',why:'comedy commitment + she never breaks character mid-jam'},
+              {name:'LOL Coaster',num:'#7',why:'roller coaster + LOL — you are laughing until you are not'},
+              {name:'Ha Ha Harm',num:'#42',why:'the joke lands, then so does she'},
+              {name:'Read the Room',num:'#11',why:'social awareness + derby reads — she sees every gap before it opens'}] },
+      { key:'art',       emoji:'🎨', label:'Art & Pop Culture',
+        nouns:['Canvas','Icon','Static','Frame','Avant'],
+        adjs:['Avant-Garde','Bold','Vivid','Abstract','Raw'],
+        actions:['Frame','Define','Strike','Render'],
+        nums:['60','1','13','7'],
+        puns:[{name:'Avant-Guard',num:'#1',why:'avant-garde art + guarding the jammer — perfect overlap'},
+              {name:'The Art of War',num:'#6',why:'Sun Tzu classic + she is genuinely both art and warfare'},
+              {name:'Still Life Ruined',num:'#13',why:'still life painting + she just ruined everything in that scene'},
+              {name:'Pop Art Attack',num:'#60',why:'Warhol era + heart attack on wheels — vivid and lethal'}] }
+    ];
+
+    // Persona word banks
+    var NG_PERSONAS = {
+      power:    { label:'Bruiser',    energy:'brute force',
+        adjs:['Iron','Steel','Brutal','Savage','Titan','Massive','Crushing','Relentless'],
+        actions:['Smash','Crush','Wreck','Hammer','Slam','Demolish','Destroy'],
+        suffix:['Smasher','Crusher','Wrecker','Destroyer','Slammer','Brute'] },
+      speed:    { label:'Ghost',      energy:'speed and evasion',
+        adjs:['Swift','Flash','Blur','Phantom','Shadow','Spectral','Elusive'],
+        actions:['Streak','Dart','Slip','Ghost','Dash','Glide'],
+        suffix:['Dash','Flash','Streak','Blur','Ghost','Slip'] },
+      strategy: { label:'Strategist', energy:'control and positioning',
+        adjs:['Calculated','Cold','Precise','Tactical','Sharp','Cunning','Deliberate'],
+        actions:['Control','Wall','Block','Counter','Read','Intercept','Override'],
+        suffix:['Protocol','Gambit','Tactic','Control','Override','Logic'] },
+      chaos:    { label:'Wild Card',  energy:'chaos and unpredictability',
+        adjs:['Feral','Wild','Riot','Erratic','Frenzied','Unhinged','Volatile'],
+        actions:['Riot','Rampage','Detonate','Unravel','Disrupt','Spiral','Erupt'],
+        suffix:['Riot','Mayhem','Chaos','Rampage','Frenzy','Havoc'] }
+    };
+
+    // Utilities
+    function ngPick(arr) { return arr[Math.floor(Math.random()*arr.length)]; }
+    function ngShuffle(arr) { return arr.slice().sort(function(){return Math.random()-0.5;}); }
+    function ngBank(key) { return NG_INTERESTS.find(function(i){return i.key===key;}); }
+
+    // Name generators by formula
+    function ngPunisher(interests, persona, firstName) {
+      var out=[]; var pd=NG_PERSONAS[persona];
+      var iKeys=ngShuffle(interests);
+
+      // [persona adj] + [interest noun]
+      var b=ngBank(iKeys[0]);
+      var adj=ngPick(pd.adjs); var noun=ngPick(b.nouns);
+      out.push({name:adj+' '+noun, num:'#'+ngPick(b.nums),
+        why:pd.energy.charAt(0).toUpperCase()+pd.energy.slice(1)+' meets '+b.label.toLowerCase()+' — intimidating by design'});
+
+      // [interest adj] + [persona suffix]
+      var b2=ngBank(iKeys[iKeys.length>1?1:0]);
+      var adj2=ngPick(b2.adjs); var sfx=ngPick(pd.suffix);
+      if(adj2+' '+sfx!==out[0].name)
+        out.push({name:adj2+' '+sfx, num:'#'+ngPick(b2.nums),
+          why:b2.label+' energy + '+pd.label+' power — the name announces itself before you arrive'});
+
+      // First-name alliteration
+      if(firstName){
+        var init=firstName[0].toUpperCase(); var pool=[];
+        iKeys.forEach(function(k){var bk=ngBank(k);pool=pool.concat(bk.nouns,bk.adjs);});
+        pool=pool.concat(pd.adjs,pd.suffix);
+        var hits=pool.filter(function(w){return w[0].toUpperCase()===init&&w.toLowerCase()!==firstName.toLowerCase();});
+        if(hits.length)
+          out.push({name:firstName+' the '+ngPick(hits), num:'#'+ngPick(ngBank(iKeys[0]).nums),
+            why:'Your name "'+firstName+'" + alliterative "'+init+'" — the sound lands twice'});
+      }
+      return out;
+    }
+
+    function ngWordplay(interests, persona, firstName) {
+      var all=[]; var iShuf=ngShuffle(interests);
+      iShuf.forEach(function(k){
+        var b=ngBank(k);
+        if(b&&b.puns) b.puns.forEach(function(p){all.push(Object.assign({},p,{src:b.label}));});
+      });
+      if(!all.length) return [];
+      var seen={}; var out=[];
+      ngShuffle(all).forEach(function(p){
+        if(out.length>=4) return;
+        if(!seen[p.name]){seen[p.name]=1; out.push({name:p.name,num:p.num,why:p.why+' — drawn from '+p.src});}
+      });
+      return out;
+    }
+
+    function ngClassic(interests, persona, firstName) {
+      var out=[]; var pd=NG_PERSONAS[persona]; var iKey=ngPick(interests); var b=ngBank(iKey);
+      if(firstName&&firstName.length){
+        var init=firstName[0].toUpperCase();
+        // Find words starting with same letter
+        var pool=b.nouns.concat(b.adjs,pd.adjs);
+        var hits=pool.filter(function(w){return w[0].toUpperCase()===init&&w.toLowerCase()!==firstName.toLowerCase();});
+        if(hits.length)
+          out.push({name:firstName+' the '+ngPick(hits), num:'#'+ngPick(b.nums),
+            why:'"'+firstName+'" sets the scene, "'+ngPick(hits)+'" delivers the threat — alliterative '+init+' lands twice'});
+        // Initial + suffix
+        out.push({name:init+'-'+ngPick(pd.suffix), num:'#'+ngPick(b.nums),
+          why:'Initial "'+init+'" as your identifier — short, distinctive, impossible to forget on the roster'});
+        // Adj + firstName
+        out.push({name:ngPick(b.adjs)+' '+firstName, num:'#'+ngPick(b.nums),
+          why:b.label+' adjective + your actual name — closest thing to a real identity, feels earned not invented'});
+      } else {
+        out.push({name:ngPick(b.adjs)+' '+ngPick(pd.actions), num:'#'+ngPick(b.nums),
+          why:'Classic structure: '+b.label+' adjective + '+pd.label+' action — clean, direct, remembered'});
+        out.push({name:ngPick(b.nouns)+' '+ngPick(pd.suffix), num:'#'+ngPick(b.nums),
+          why:'Classic compound: two nouns, two identities — everything you are in two words'});
+      }
+      return out;
+    }
+
+    function ngDouble(interests, persona, firstName) {
+      var out=[]; var pd=NG_PERSONAS[persona]; var iShuf=ngShuffle(interests);
+      // Two interests mashed
+      if(iShuf.length>=2){
+        var bA=ngBank(iShuf[0]); var bB=ngBank(iShuf[1]);
+        var wA=ngPick(bA.nouns.concat(bA.adjs)); var wB=ngPick(bB.nouns.concat(pd.suffix));
+        out.push({name:wA+' '+wB, num:'#'+ngPick(bA.nums),
+          why:'Double Threat: '+bA.label+' meets '+bB.label+' — two worlds collide, neither survives intact'});
+      }
+      // Interest noun + persona action (contrast)
+      var bC=ngBank(iShuf[0]);
+      out.push({name:ngPick(bC.nouns)+' '+ngPick(pd.actions), num:'#'+ngPick(bC.nums),
+        why:'Double Threat: '+bC.label+' imagery + '+pd.energy+' action — the contrast is the entire point'});
+      // Persona adj + interest noun (unexpected)
+      var bD=ngBank(iShuf[iShuf.length>1?1:0]);
+      var combo=ngPick(pd.adjs)+' '+ngPick(bD.nouns);
+      if(!out.find(function(x){return x.name===combo;}))
+        out.push({name:combo, num:'#'+ngPick(bD.nums),
+          why:pd.label+' energy + '+bD.label+' imagery — unexpected combination that stays with you'});
+      return out;
+    }
+
+    // Main generator
+    function ngGenerate() {
+      var fn=ngState.firstName, ix=ngState.interests, pe=ngState.persona, fm=ngState.formula;
+      var raw=[];
+      if(fm==='punisher')  raw=ngPunisher(ix,pe,fn);
+      else if(fm==='wordplay') raw=ngWordplay(ix,pe,fn);
+      else if(fm==='classic')  raw=ngClassic(ix,pe,fn);
+      else if(fm==='double')   raw=ngDouble(ix,pe,fn);
+      // Pad if short
+      if(raw.length<3) raw=raw.concat(ngPunisher(ix,pe,fn)).concat(ngDouble(ix,pe,fn));
+      var seen={}; var final=[];
+      raw.forEach(function(c){if(!seen[c.name]&&final.length<5){seen[c.name]=1;final.push(c);}});
+      return final;
+    }
+
+    function ngShowResults() {
+      var names=ngGenerate(); var html='';
+      names.forEach(function(n){
+        html+='<div style="background:rgba(255,255,255,0.03);border:1px solid rgba(255,255,255,0.08);border-left:3px solid var(--pink);border-radius:8px;padding:16px 20px;">'
+          +'<div style="display:flex;align-items:flex-start;justify-content:space-between;gap:12px;margin-bottom:6px;">'
+          +'<div style="font-family:var(--font-display);font-size:24px;color:var(--white);letter-spacing:0.5px;">'+n.name+'</div>'
+          +'<div style="font-size:16px;color:var(--gold);font-weight:700;white-space:nowrap;padding-top:4px;">'+n.num+'</div>'
+          +'</div>'
+          +'<div style="font-size:12px;color:var(--gray);line-height:1.5;">'+n.why+'</div>'
+          +'</div>';
+      });
+      // Personalized subtitle
+      var parts=[];
+      if(ngState.firstName) parts.push('"'+ngState.firstName+'"');
+      if(ngState.interests.length) parts.push(ngState.interests.map(function(k){return ngBank(k).label.split(' ')[0].toLowerCase();}).join(' + '));
+      if(ngState.persona) parts.push(NG_PERSONAS[ngState.persona].label.toLowerCase()+' persona');
+      document.getElementById('ng-results-sub').textContent='Generated from your '+parts.join(', ')+'. Twist them. Combine them. Make one yours.';
+      document.getElementById('ng-name-cards').innerHTML=html;
+      ngShowStep('results');
+    }
+
+    // Step navigation
+    var NG_STEP_MAP={'step-1':1,'step-2':2,'step-3':3,'step-4':4,'results':5};
+    function ngShowStep(id) {
+      ['ng-step-1','ng-step-2','ng-step-3','ng-step-4','ng-results'].forEach(function(el){
+        document.getElementById(el).style.display='none';
+      });
+      document.getElementById('ng-'+id).style.display='block';
+      var n=NG_STEP_MAP[id]||1;
+      [1,2,3,4].forEach(function(i){
+        var d=document.getElementById('ngdot-'+i);
+        d.className='ng-dot'+(i<n?' ng-dot-done':i===n?' ng-dot-active':'');
+      });
+      document.getElementById('ng-progress-bar').style.display=(id==='results')?'none':'flex';
+    }
+
+    function ngNext(from) {
+      if(from===1){
+        ngState.firstName=document.getElementById('ng-name-input').value.trim();
+        ngRenderInterests(); ngShowStep('step-2');
+      } else if(from===2){
+        if(!ngState.interests.length){document.getElementById('ng-interest-err').style.display='block';return;}
+        document.getElementById('ng-interest-err').style.display='none'; ngShowStep('step-3');
+      }
+    }
+    function ngSkipName(){ ngState.firstName=''; ngRenderInterests(); ngShowStep('step-2'); }
+    function ngBack(from){
+      if(from===2) ngShowStep('step-1');
+      else if(from===3) ngShowStep('step-2');
+      else if(from===4) ngShowStep('step-3');
+    }
+    function ngRenderInterests(){
+      var html='';
+      NG_INTERESTS.forEach(function(i){
+        var sel=ngState.interests.indexOf(i.key)>-1?' ng-chip-sel':'';
+        html+='<button class="ng-chip'+sel+'" onclick="ngToggleInterest(this,\''+i.key+'\')">'
+          +'<span style="font-size:18px;">'+i.emoji+'</span><span>'+i.label+'</span></button>';
+      });
+      document.getElementById('ng-interest-grid').innerHTML=html;
+    }
+    function ngToggleInterest(btn,key){
+      var idx=ngState.interests.indexOf(key);
+      if(idx>-1){ngState.interests.splice(idx,1);btn.classList.remove('ng-chip-sel');}
+      else{ngState.interests.push(key);btn.classList.add('ng-chip-sel');}
+      if(ngState.interests.length) document.getElementById('ng-interest-err').style.display='none';
+    }
+    function ngSelectPersona(btn,val){
+      document.querySelectorAll('#ng-persona-grid .name-choice-btn').forEach(function(b){b.classList.remove('selected');});
+      btn.classList.add('selected'); ngState.persona=val;
+      setTimeout(function(){ngShowStep('step-4');},250);
+    }
+    function ngSelectFormula(btn,val){
+      document.querySelectorAll('#ng-formula-grid .name-choice-btn').forEach(function(b){b.classList.remove('selected');});
+      btn.classList.add('selected'); ngState.formula=val;
+      setTimeout(function(){ngShowResults();},250);
+    }
+    function ngRegenerate(){ ngShowResults(); }
+    function ngReset(){
+      ngState={step:1,firstName:'',interests:[],persona:null,formula:null};
+      document.getElementById('ng-name-input').value='';
+      ngShowStep('step-1');
+    }
+  </script>
+
+  <!-- =========================================
+       HIDDEN REALITIES
+  ========================================= -->
+  <section id="hidden-realities" style="background:var(--black-soft);padding:var(--section-pad);position:relative;overflow:hidden;">
+    <div style="position:absolute;bottom:-100px;right:-100px;width:400px;height:400px;border-radius:50%;background:radial-gradient(circle,rgba(234,179,8,0.06) 0%,transparent 65%);pointer-events:none;"></div>
+    <div class="container">
+      <div class="section-header-center">
+        <div class="section-eyebrow" style="justify-content:center;">
+          <span class="tag tag-gold">No Sugarcoating</span>
+        </div>
+        <h2 class="section-title display" style="text-align:center;">What nobody <span class="text-gold">tells you first.</span></h2>
+        <p class="section-sub" style="max-width:600px;margin:0 auto 56px;">Every sport has a version of this. Derby's version is just unusually honest once you're in. Here's what the recruitment flyer leaves out.</p>
+      </div>
+
+      <div style="display:grid;grid-template-columns:repeat(2,1fr);gap:24px;">
+
+        <div style="background:var(--black-card);border:1px solid var(--black-border);border-top:3px solid var(--pink);border-radius:var(--radius-md);padding:32px;display:flex;flex-direction:column;">
+          <div style="font-size:28px;margin-bottom:12px;">💸</div>
+          <h3 style="font-family:var(--font-display);font-size:22px;color:var(--white);margin-bottom:12px;letter-spacing:0.5px;">THE REAL COST</h3>
+          <p style="font-size:14px;color:var(--gray);line-height:1.7;margin-bottom:16px;">Starter gear runs $200–$400 before you hit your first practice. Once you're rostered, add league dues ($30–$80/month), travel costs for away bouts, insurance fees, and the reality that wheels wear out.</p>
+          <div style="background:rgba(236,72,153,0.06);border:1px solid rgba(236,72,153,0.15);border-radius:8px;padding:14px 16px;margin-top:auto;">
+            <p style="font-size:13px;color:var(--white-soft);line-height:1.6;margin:0;">A realistic first-year total lands somewhere between <span style="color:var(--pink);font-weight:700;">$800 and $1,500</span>. Budget for it before you fall in love with the sport. You will fall in love with the sport.</p>
+          </div>
+        </div>
+
+        <div style="background:var(--black-card);border:1px solid var(--black-border);border-top:3px solid var(--gold);border-radius:var(--radius-md);padding:32px;display:flex;flex-direction:column;">
+          <div style="font-size:28px;margin-bottom:12px;">⏰</div>
+          <h3 style="font-family:var(--font-display);font-size:22px;color:var(--white);margin-bottom:12px;letter-spacing:0.5px;">THE TIME COMMITMENT</h3>
+          <p style="font-size:14px;color:var(--gray);line-height:1.7;margin-bottom:16px;">Two to three practices a week is standard. That's not counting NSO (Non-Skating Official) duties, committee work, or mandatory volunteer hours that most leagues require from all members.</p>
+          <div style="background:rgba(234,179,8,0.06);border:1px solid rgba(234,179,8,0.15);border-radius:8px;padding:14px 16px;margin-top:auto;">
+            <p style="font-size:13px;color:var(--white-soft);line-height:1.6;margin:0;">Derby runs on volunteer labor. If you join, you're part of that. Most skaters find it worth it, but go in knowing it's a serious commitment, not a single class.</p>
+          </div>
+        </div>
+
+        <div style="background:var(--black-card);border:1px solid var(--black-border);border-top:3px solid #22c55e;border-radius:var(--radius-md);padding:32px;display:flex;flex-direction:column;">
+          <div style="font-size:28px;margin-bottom:12px;">📉</div>
+          <h3 style="font-family:var(--font-display);font-size:22px;color:var(--white);margin-bottom:12px;letter-spacing:0.5px;">THE DROPOUT ZONE</h3>
+          <p style="font-size:14px;color:var(--gray);line-height:1.7;margin-bottom:16px;">Weeks three through six is when most fresh meat quit. You're past the novelty high, your body is sore, veteran skaters look impossibly good, and imposter syndrome is at its loudest.</p>
+          <div style="background:rgba(34,197,94,0.06);border:1px solid rgba(34,197,94,0.15);border-radius:8px;padding:14px 16px;margin-top:auto;">
+            <p style="font-size:13px;color:var(--white-soft);line-height:1.6;margin:0;">Falling is data, not failure. Every bad practice is practice. The skaters who look effortless now looked exactly like you six months ago. Stay through week six.</p>
+          </div>
+        </div>
+
+        <div style="background:var(--black-card);border:1px solid var(--black-border);border-top:3px solid var(--white-soft);border-radius:var(--radius-md);padding:32px;display:flex;flex-direction:column;">
+          <div style="font-size:28px;margin-bottom:12px;">🏁</div>
+          <h3 style="font-family:var(--font-display);font-size:22px;color:var(--white);margin-bottom:12px;letter-spacing:0.5px;">THE POST-FRESH MEAT LIMBO</h3>
+          <p style="font-size:14px;color:var(--gray);line-height:1.7;margin-bottom:16px;">Passing your skills assessment (MSR) doesn't mean you're immediately on a team. Most leagues have a draft process. You may wait months, skate non-contact scrimmages, or join a B team before getting rostered.</p>
+          <div style="background:rgba(255,255,255,0.06);border:1px solid rgba(255,255,255,0.15);border-radius:8px;padding:14px 16px;margin-top:auto;">
+            <p style="font-size:13px;color:var(--white-soft);line-height:1.6;margin:0;">Use the limbo period. It's when you get real game time without pressure. Most skaters look back on it as some of their best skating.</p>
+          </div>
+        </div>
+
+      </div>
+
+      <div style="text-align:center;margin-top:40px;">
+        <p style="font-size:15px;color:var(--gray);max-width:520px;margin:0 auto 20px;">Pack Ready covers all of this in detail: the costs, the timeline, the mental side, and what to do when it gets hard. Because it will get hard.</p>
+        <a href="#pricing" class="btn btn-primary">Get the Full Guide</a>
+      </div>
+    </div>
+  </section>
+
+  <!-- =========================================
+       WHO IT'S FOR
+  ========================================= -->
+  <section class="for-section" id="for">
+    <div class="container">
+      <div class="section-header-center">
+        <div class="section-eyebrow" style="justify-content:center;">
+          <span class="tag tag-white">Who It's For</span>
+        </div>
+        <h2 class="section-title display">Sound like <span class="text-pink">you?</span></h2>
+        <p class="section-sub">Pack Ready was built for people at the start of the journey, whatever that looks like. Most beginners don't know what they don't know yet. This fixes that.</p>
+      </div>
+
+      <div class="archetypes-grid">
+        <div class="archetype-card">
+          <div class="archetype-icon">🌱</div>
+          <div class="archetype-title">The Total Newbie</div>
+          <div class="archetype-desc">Never been on skates, maybe never played a sport. You have a thousand questions and no idea where to start. Start here.</div>
+        </div>
+        <div class="archetype-card">
+          <div class="archetype-icon">💪</div>
+          <div class="archetype-title">The Fitness Curious</div>
+          <div class="archetype-desc">You want a workout that doesn't feel like punishment. Derby qualifies, but it's a sport first. Know what you're getting into.</div>
+        </div>
+        <div class="archetype-card">
+          <div class="archetype-icon">🤝</div>
+          <div class="archetype-title">The Plus-One</div>
+          <div class="archetype-desc">You showed up to be supportive. Now you're genuinely considering it. That's exactly how most skaters start.</div>
+        </div>
+        <div class="archetype-card">
+          <div class="archetype-icon">↩️</div>
+          <div class="archetype-title">The Returning Skater</div>
+          <div class="archetype-desc">You used to skate. You've been away. The muscle memory is still in there, but the gear prices are not what you remember.</div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- =========================================
+       TESTIMONIALS
+  ========================================= -->
+  <section class="testimonials-section">
+    <div class="container">
+      <div class="section-header-center">
+        <div class="section-eyebrow" style="justify-content:center;">
+          <span class="tag tag-pink">From the Pack</span>
+        </div>
+        <h2 class="section-title display">What <span class="text-pink">skaters say.</span></h2>
+      </div>
+
+      <div class="testimonials-grid">
+        <div class="testimonial-card">
+          <div class="testimonial-stars">★★★★★</div>
+          <p class="testimonial-quote">I had so many questions before my first practice and couldn't find a single resource that answered all of them. Pack Ready is genuinely everything I needed in one place. The minimum skills breakdown alone is worth the price.</p>
+          <div class="testimonial-author">
+            <div class="testimonial-avatar">S</div>
+            <div>
+              <div class="testimonial-name">Sylvia Wrath</div>
+            </div>
+          </div>
+        </div>
+        <div class="testimonial-card">
+          <div class="testimonial-stars">★★★★★</div>
+          <p class="testimonial-quote">The 27-in-5 section is a total cheat code. I'd been dreading that test for months. The pacing strategy and off-skates conditioning plan actually made it feel achievable. Passed it on my second attempt. Sent it to everyone in my fresh meat cohort.</p>
+          <div class="testimonial-author">
+            <div class="testimonial-avatar">T</div>
+            <div>
+              <div class="testimonial-name">Torque Tornado</div>
+            </div>
+          </div>
+        </div>
+        <div class="testimonial-card">
+          <div class="testimonial-stars">★★★★★</div>
+          <p class="testimonial-quote">I came from zero athletic background and was convinced derby wasn't for me. This guide convinced me otherwise. The culture section especially made me feel like I actually belonged before I'd even laced up my skates.</p>
+          <div class="testimonial-author">
+            <div class="testimonial-avatar">S</div>
+            <div>
+              <div class="testimonial-name">Slamantha Fox</div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- =========================================
+       WAITLIST
+  ========================================= -->
+  <section class="waitlist-section" id="waitlist">
+    <div class="waitlist-inner">
+      <div class="section-eyebrow" style="justify-content:center;margin-bottom:16px;">
+        <span class="tag tag-gold">App Waitlist</span>
+      </div>
+      <h2 class="section-title display" style="text-align:center;margin-bottom:16px;">
+        Be first <span class="text-gold">in the pack.</span>
+      </h2>
+      <p class="section-sub">
+        The Pack Ready app is in development. Join the waitlist and get early access, a launch discount, and occasional updates worth reading.
+      </p>
+      <form class="email-form" onsubmit="handleWaitlist(event)">
+        <input class="email-input" type="email" placeholder="your@email.com" required />
+        <button type="submit" class="btn btn-gold">Join Waitlist</button>
+      </form>
+      <p style="margin-top:12px;font-size:12px;color:#6b7280;">No spam. Unsubscribe any time. We send emails worth reading.</p>
+    </div>
+  </section>
+
+  <!-- =========================================
+       PRICING
+  ========================================= -->
+  <section class="pricing-section" id="pricing">
+    <div class="container">
+      <div class="section-header-center">
+        <div class="section-eyebrow" style="justify-content:center;">
+          <span class="tag tag-white">Pricing</span>
+        </div>
+        <h2 class="section-title display">Simple. <span class="text-pink">Honest.</span> Worth it.</h2>
+        <p class="section-sub">No subscriptions required to get started. Just buy the guide and go.</p>
+      </div>
+
+      <div class="pricing-grid">
+        <div class="pricing-card">
+          <div class="pricing-name">The Guide</div>
+          <div class="pricing-price">
+            <span class="pricing-price-amount">$35</span>
+            <span class="pricing-price-period">one-time</span>
+          </div>
+          <p class="pricing-desc">The complete 99-page PDF guide. Instant download, yours forever.</p>
+          <div class="pricing-features">
+            <div class="pricing-feature"><span class="pricing-check">✓</span> 99 pages of beginner content</div>
+            <div class="pricing-feature"><span class="pricing-check">✓</span> Full minimum skills breakdown (33 skills)</div>
+            <div class="pricing-feature"><span class="pricing-check">✓</span> Gear buying guide with budgets</div>
+            <div class="pricing-feature"><span class="pricing-check">✓</span> 12-week training plan</div>
+            <div class="pricing-feature"><span class="pricing-check">✓</span> Printable skill checklist</div>
+            <div class="pricing-feature"><span class="pricing-check">✓</span> Derby glossary A-Z</div>
+            <div class="pricing-feature"><span class="pricing-check dim">✓</span><span style="color:#4b5563">App access (not included)</span></div>
+          </div>
+          <a href="https://gumroad.com" class="btn btn-outline" style="width:100%;justify-content:center;" target="_blank">Get the Guide</a>
+        </div>
+
+        <div class="pricing-card featured">
+          <div class="pricing-popular">Most Popular</div>
+          <div class="pricing-name">Bundle</div>
+          <div class="pricing-price-original">$135 separately</div>
+          <div class="pricing-price">
+            <span class="pricing-price-amount">$100</span>
+            <span class="pricing-price-period">save $35</span>
+          </div>
+          <p class="pricing-desc">The guide plus a full year of app access when it launches. The complete Pack Ready experience.</p>
+          <div class="pricing-features">
+            <div class="pricing-feature"><span class="pricing-check gold">✓</span> Everything in The Guide</div>
+            <div class="pricing-feature"><span class="pricing-check gold">✓</span> 1 year of app access</div>
+            <div class="pricing-feature"><span class="pricing-check gold">✓</span> Minimum skills tracker (33 skills)</div>
+            <div class="pricing-feature"><span class="pricing-check gold">✓</span> Gamification: XP, badges, levels</div>
+            <div class="pricing-feature"><span class="pricing-check gold">✓</span> Practice log</div>
+            <div class="pricing-feature"><span class="pricing-check gold">✓</span> Learn section with quizzes</div>
+            <div class="pricing-feature"><span class="pricing-check gold">✓</span> Priority early access to app</div>
+          </div>
+          <a href="#waitlist" class="btn btn-primary" style="width:100%;justify-content:center;">Get Bundle (Coming Soon)</a>
+        </div>
+
+        <div class="pricing-card">
+          <div class="pricing-name">App Only</div>
+          <div class="pricing-price">
+            <span class="pricing-price-amount">$13</span>
+            <span class="pricing-price-period">/month</span>
+          </div>
+          <p class="pricing-desc">App access for skaters who already have the guide or just want the tracker and tools.</p>
+          <div class="pricing-features">
+            <div class="pricing-feature"><span class="pricing-check">✓</span> Full minimum skills tracker</div>
+            <div class="pricing-feature"><span class="pricing-check">✓</span> Gamification system</div>
+            <div class="pricing-feature"><span class="pricing-check">✓</span> Practice log</div>
+            <div class="pricing-feature"><span class="pricing-check">✓</span> Learn section</div>
+            <div class="pricing-feature"><span class="pricing-check">✓</span> Rules quizzes</div>
+            <div class="pricing-feature"><span class="pricing-check">✓</span> Cancel any time</div>
+            <div class="pricing-feature"><span class="pricing-check dim">✓</span><span style="color:#4b5563">Guide not included</span></div>
+          </div>
+          <a href="#waitlist" class="btn btn-outline" style="width:100%;justify-content:center;">Join Waitlist</a>
+        </div>
+      </div>
+
+      <p style="text-align:center;margin-top:32px;font-size:13px;color:#6b7280;">
+        App pricing is for when the app launches. Get on the waitlist to lock in your early-bird rate.
+      </p>
+    </div>
+  </section>
+
+  <!-- =========================================
+       FAQ
+  ========================================= -->
+  <section class="faq-section" id="faq">
+    <div class="container">
+      <div class="section-header-center">
+        <h2 class="section-title display">Got <span class="text-pink">questions?</span></h2>
+      </div>
+
+      <div class="faq-grid">
+        <div class="faq-item">
+          <div class="faq-question" onclick="toggleFaq(this)">
+            I've never skated before. Is this too advanced?
+            <span class="faq-icon">+</span>
+          </div>
+          <div class="faq-answer">
+            The guide starts from scratch. Section 2 assumes zero gear knowledge. Section 4 starts with how to stand in skates. If you've never been on wheels in your life, this was written for you specifically.
+          </div>
+        </div>
+        <div class="faq-item">
+          <div class="faq-question" onclick="toggleFaq(this)">
+            Is the guide designed for women only?
+            <span class="faq-icon">+</span>
+          </div>
+          <div class="faq-answer">
+            Absolutely not. Derby is for everyone. Pack Ready reflects the full inclusivity of the sport, including WFTDA's gender-inclusive policies, the MRDA (Men's Roller Derby Association), and the Open Division. If you skate, this guide is for you.
+          </div>
+        </div>
+        <div class="faq-item">
+          <div class="faq-question" onclick="toggleFaq(this)">
+            Do I need to join a league to use this?
+            <span class="faq-icon">+</span>
+          </div>
+          <div class="faq-answer">
+            Nope. The guide is designed for skaters at every stage, including those still figuring out if derby is for them. That said, Section 3 will help you find and evaluate a league when you're ready.
+          </div>
+        </div>
+        <div class="faq-item">
+          <div class="faq-question" onclick="toggleFaq(this)">
+            How much does roller derby actually cost?
+            <span class="faq-icon">+</span>
+          </div>
+          <div class="faq-answer">
+            More than most people expect. Starter gear runs $200–$400. Once you're rostered, add league dues ($30–$80/month), travel to away bouts, insurance, and replacement gear as it wears out. A realistic first-year total is $800–$1,500. The guide has a full cost breakdown in Section 2, plus tips on buying used gear safely.
+          </div>
+        </div>
+        <div class="faq-item">
+          <div class="faq-question" onclick="toggleFaq(this)">
+            How long does fresh meat usually take?
+            <span class="faq-icon">+</span>
+          </div>
+          <div class="faq-answer">
+            Anywhere from 2 to 6 months depending on your league's schedule and how often you can train. Some leagues run fresh meat as a structured program with a fixed end date. Others are more open-ended. The guide covers what to expect at each stage so you're not guessing how far along you are.
+          </div>
+        </div>
+        <div class="faq-item">
+          <div class="faq-question" onclick="toggleFaq(this)">
+            Is the WFTDA Minimum Skills Requirement (MSR) still required?
+            <span class="faq-icon">+</span>
+          </div>
+          <div class="faq-answer">
+            WFTDA removed the Minimum Skills Requirement (MSR) as a mandatory standard in 2020 and replaced it with a more flexible framework called "This is Roller Derby." Many leagues still use the 2017 MSR as a benchmark. The guide covers both frameworks so you're prepared either way.
+          </div>
+        </div>
+        <div class="faq-item">
+          <div class="faq-question" onclick="toggleFaq(this)">
+            How do I get the guide after purchase?
+            <span class="faq-icon">+</span>
+          </div>
+          <div class="faq-answer">
+            Instant PDF download via Gumroad. Once you complete your purchase you'll receive a download link immediately. The PDF is optimized for both screen reading and printing.
+          </div>
+        </div>
+        <div class="faq-item">
+          <div class="faq-question" onclick="toggleFaq(this)">
+            When does the app launch?
+            <span class="faq-icon">+</span>
+          </div>
+          <div class="faq-answer">
+            The app is in active development. Join the waitlist above to get notified first and lock in an early-bird rate when we go live.
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- =========================================
+       FINAL CTA
+  ========================================= -->
+  <section class="final-cta">
+    <div class="final-cta-inner">
+      <div class="section-eyebrow" style="justify-content:center;margin-bottom:20px;">
+        <span class="tag tag-pink">Ready?</span>
+      </div>
+      <h2 class="final-cta-title display">
+        Your pack<br>is <span class="text-pink">waiting.</span>
+      </h2>
+      <p class="final-cta-sub">
+        Every skater who made it through fresh meat started with one decision to show up. This is yours.
+      </p>
+      <div class="final-cta-btns">
+        <a href="https://gumroad.com" class="btn btn-primary btn-large" target="_blank">
+          Get the Guide · $34.99
+        </a>
+        <a href="#waitlist" class="btn btn-outline btn-large">
+          Join the App Waitlist
+        </a>
+      </div>
+    </div>
+  </section>
+
+  <!-- =========================================
+       FOOTER
+  ========================================= -->
+  <footer>
+    <div class="footer-inner container">
+      <div>
+        <div class="footer-brand-name">PACK<span>READY</span></div>
+        <p class="footer-brand-desc">
+          The complete roller derby beginner companion. Built by skaters, for skaters, from the first practice to the first bout.
+        </p>
+        <div class="footer-socials">
+          <div class="footer-social">𝕏</div>
+          <div class="footer-social">ig</div>
+          <div class="footer-social">tt</div>
+          <div class="footer-social">▶</div>
+        </div>
+      </div>
+      <div>
+        <div class="footer-col-title">Products</div>
+        <div class="footer-links">
+          <a href="#guide" class="footer-link">The Guide</a>
+          <a href="#app" class="footer-link">The App</a>
+          <a href="#pricing" class="footer-link">Pricing</a>
+          <a href="#waitlist" class="footer-link">App Waitlist</a>
+        </div>
+      </div>
+      <div>
+        <div class="footer-col-title">Resources</div>
+        <div class="footer-links">
+          <a href="https://wftda.com" class="footer-link" target="_blank">WFTDA</a>
+          <a href="#name-generator" class="footer-link">Derby Name Generator</a>
+          <a href="#faq" class="footer-link">FAQ</a>
+          <a href="mailto:ls@lindseyseril.com" class="footer-link">Contact</a>
+        </div>
+      </div>
+    </div>
+    <div class="footer-bottom container">
+      <div class="footer-copyright">
+        2026 Pack Ready. Made with love for the roller derby community.
+      </div>
+      <div style="font-size:13px;color:#6b7280;display:flex;gap:20px;">
+        <span style="cursor:pointer">Privacy</span>
+        <span style="cursor:pointer">Terms</span>
+        <span style="cursor:pointer">Refunds</span>
+      </div>
+    </div>
+  </footer>
+
+  <!-- =========================================
+       JS
+  ========================================= -->
+  <script>
+    // FAQ toggle
+    function toggleFaq(el) {
+      const item = el.parentElement;
+      item.classList.toggle('open');
+    }
+
+    // Mobile menu
+    function toggleMobileMenu() {
+      const links = document.querySelector('.nav-links');
+      if (!links) return;
+      if (links.style.display === 'flex') {
+        links.style.display = 'none';
+      } else {
+        links.style.display = 'flex';
+        links.style.flexDirection = 'column';
+        links.style.position = 'absolute';
+        links.style.top = '64px';
+        links.style.left = '0';
+        links.style.right = '0';
+        links.style.background = '#111';
+        links.style.padding = '20px 24px';
+        links.style.gap = '20px';
+        links.style.borderBottom = '1px solid #2a2a2a';
+      }
+    }
+
+    // Waitlist form
+    function handleWaitlist(e) {
+      e.preventDefault();
+      const input = e.target.querySelector('input');
+      const btn = e.target.querySelector('button');
+      btn.textContent = 'You\'re on the list!';
+      btn.style.background = '#22c55e';
+      btn.style.boxShadow = '0 4px 20px rgba(34,197,94,0.3)';
+      input.value = '';
+      input.placeholder = 'Thanks! We\'ll be in touch.';
+      input.disabled = true;
+    }
+
+    // Nav scroll effect
+    const nav = document.getElementById('nav');
+    window.addEventListener('scroll', () => {
+      if (window.scrollY > 20) {
+        nav.style.background = 'rgba(17,17,17,0.97)';
+      } else {
+        nav.style.background = 'rgba(17,17,17,0.88)';
+      }
+    });
+
+    // Animate progress bar on scroll
+    const observer = new IntersectionObserver((entries) => {
+      entries.forEach(entry => {
+        if (entry.isIntersecting) {
+          entry.target.style.width = entry.target.dataset.width;
+        }
+      });
+    }, { threshold: 0.3 });
+
+    document.querySelectorAll('.progress-fill').forEach(el => {
+      const w = el.style.width;
+      el.style.width = '0';
+      el.dataset.width = w;
+      observer.observe(el);
+    });
+
+    // Scroll-triggered fade-up for non-hero elements
+    const fadeObserver = new IntersectionObserver((entries) => {
+      entries.forEach(entry => {
+        if (entry.isIntersecting) {
+          entry.target.style.opacity = '1';
+          entry.target.style.transform = 'translateY(0)';
+        }
+      });
+    }, { threshold: 0.1 });
+
+    document.querySelectorAll('.archetype-card, .chapter-row, .testimonial-card, .pricing-card, .app-feature').forEach(el => {
+      el.style.opacity = '0';
+      el.style.transform = 'translateY(20px)';
+      el.style.transition = 'opacity 0.5s ease, transform 0.5s ease';
+      fadeObserver.observe(el);
+    });
+  </script>
+</body>
+</html>
